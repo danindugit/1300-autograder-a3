@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -48,223 +47,223 @@ If there are more than 1 countryNames with the same length, then take your pick 
 int findCountryIndexWithMinOrMaxLength (int minOrMax, char countryNames [COUNTRIES][100]);
 
 
-int main (int argc, char * argv[]) {
+// int main (int argc, char * argv[]) {
 
    
-   int country [COUNTRIES][3];
+//    int country [COUNTRIES][3];
    
-   int totalAllMedals [3];
-   int row, maxMedal, whichMedal, totalM;
+//    int totalAllMedals [3];
+//    int row, maxMedal, whichMedal, totalM;
    
-   int totalAllCountries [COUNTRIES];
+//    int totalAllCountries [COUNTRIES];
    
-   char countryNames [COUNTRIES][100];
-   char name [100];
+//    char countryNames [COUNTRIES][100];
+//    char name [100];
    
-   int indexOfCountries [COUNTRIES];
-   int cIndex, minOrMax;
-   int choice;
+//    int indexOfCountries [COUNTRIES];
+//    int cIndex, minOrMax;
+//    int choice;
     
-    readFromFile (argv[1], country, countryNames);
+//     readFromFile (argv[1], country, countryNames);
 
-   //char countryNames [COUNTRIES][100] = {"Japan", "USA", "China", "ROC", "UK", "Australia", "Kosova", "Italy", "France", "Canada"};
+//    //char countryNames [COUNTRIES][100] = {"Japan", "USA", "China", "ROC", "UK", "Australia", "Kosova", "Italy", "France", "Canada"};
    
-    do {
-        printf ("\nHere is the menu \n\n");
-        printf ("1. Display all country names read from file and the total number of medals won by each\n");
-        printf ("2.    Function 2 - Find total number of medals won by each country\n");
-        printf ("3.    Function 3 - Finds total number of medals in each category (Gold, Silver, Bronze)\n");
-        printf ("4.    Function 4 – Display horizontal histogram\n");
-        printf ("5.    Function 5 – Search for a country and return the total number of medals won by it\n");
-        printf ("6.    Function 6 – Rank and display top three countries in order of total medals won\n");
-        printf ("7.    Function 7 – Rank and display top three countries in order of total gold medals won\n");
-        printf ("8.    Function 8 – Find and display all countries that won no X medals, given X as either Gold, Silver or Bronze\n");
-        printf ("9.    Function 9 – Find and display all countries that won ONLY X medals, given X as either Gold, Silver or Bronze\n");
-        printf ("10.   Function 10 – Find and display name of the country that has minimum or maximum length among all countries read in option 1\n");
-        //printf ("10.   Function 11 - Display Vertical Histogram\n");
-        printf ("11.    Exit\n");
+//     do {
+//         printf ("\nHere is the menu \n\n");
+//         printf ("1. Display all country names read from file and the total number of medals won by each\n");
+//         printf ("2.    Function 2 - Find total number of medals won by each country\n");
+//         printf ("3.    Function 3 - Finds total number of medals in each category (Gold, Silver, Bronze)\n");
+//         printf ("4.    Function 4 – Display horizontal histogram\n");
+//         printf ("5.    Function 5 – Search for a country and return the total number of medals won by it\n");
+//         printf ("6.    Function 6 – Rank and display top three countries in order of total medals won\n");
+//         printf ("7.    Function 7 – Rank and display top three countries in order of total gold medals won\n");
+//         printf ("8.    Function 8 – Find and display all countries that won no X medals, given X as either Gold, Silver or Bronze\n");
+//         printf ("9.    Function 9 – Find and display all countries that won ONLY X medals, given X as either Gold, Silver or Bronze\n");
+//         printf ("10.   Function 10 – Find and display name of the country that has minimum or maximum length among all countries read in option 1\n");
+//         //printf ("10.   Function 11 - Display Vertical Histogram\n");
+//         printf ("11.    Exit\n");
         
-        printf ("Enter your choice: ");
-        scanf ("%d", &choice);
+//         printf ("Enter your choice: ");
+//         scanf ("%d", &choice);
         
-        switch (choice) {
-            case 1:
+//         switch (choice) {
+//             case 1:
                 
-                /* This loop is only to check if the values are correctly read from the file and placed in arrays*/
-                for (int i = 0; i < COUNTRIES; i++) {
+//                 /* This loop is only to check if the values are correctly read from the file and placed in arrays*/
+//                 for (int i = 0; i < COUNTRIES; i++) {
                     
-                    printf ("Country: %s, ", countryNames [i]);
-                    printf ("Gold = %d, Silver = %d, Bronze = %d\n", country [i][0], country [i] [1], country [i][2]);
+//                     printf ("Country: %s, ", countryNames [i]);
+//                     printf ("Gold = %d, Silver = %d, Bronze = %d\n", country [i][0], country [i] [1], country [i][2]);
                     
-                }
-                break;
-            case 2:
-                findTotalPerCountry (country, totalAllCountries);
+//                 }
+//                 break;
+//             case 2:
+//                 findTotalPerCountry (country, totalAllCountries);
                 
-                for (row = 0; row < COUNTRIES; row++) {
+//                 for (row = 0; row < COUNTRIES; row++) {
                     
-                    printf ("Country %s = %d \n", countryNames [row], totalAllCountries [row]);
-                }
-                break;
-            case 3:
-                maxMedal = findTotalPerMedal (country, totalAllMedals, &whichMedal);
+//                     printf ("Country %s = %d \n", countryNames [row], totalAllCountries [row]);
+//                 }
+//                 break;
+//             case 3:
+//                 maxMedal = findTotalPerMedal (country, totalAllMedals, &whichMedal);
                 
-                for (row = 0; row < 3; row++) {
+//                 for (row = 0; row < 3; row++) {
                     
-                    printf ("Medal = ");
+//                     printf ("Medal = ");
                     
-                    switch (row) {
+//                     switch (row) {
                             
-                        case 0: printf ("Gold, ");
-                            break;
+//                         case 0: printf ("Gold, ");
+//                             break;
                             
-                        case 1: printf ("Silver, ");
-                            break;
+//                         case 1: printf ("Silver, ");
+//                             break;
                             
-                        case 2: printf ("Bronze, ");
-                            break;
-                    }
+//                         case 2: printf ("Bronze, ");
+//                             break;
+//                     }
                     
-                    printf ("Total = %d \n", totalAllMedals [row]);
-                }
+//                     printf ("Total = %d \n", totalAllMedals [row]);
+//                 }
                 
-                printf ("Maximum number of medals = %d in category (", maxMedal);
+//                 printf ("Maximum number of medals = %d in category (", maxMedal);
                 
-                switch (whichMedal) {
+//                 switch (whichMedal) {
                         
-                    case 0: printf ("Gold) \n");
-                        break;
+//                     case 0: printf ("Gold) \n");
+//                         break;
                         
-                    case 1: printf ("Silver) \n");
-                        break;
+//                     case 1: printf ("Silver) \n");
+//                         break;
                         
-                    case 2: printf ("Bronze) \n");
-                        break;
-                }
+//                     case 2: printf ("Bronze) \n");
+//                         break;
+//                 }
                 
-                break;
-            case 4:
-                printf ("Printing Histogram \n");
-                hHistogram (countryNames, totalAllCountries);
-                break;
+//                 break;
+//             case 4:
+//                 printf ("Printing Histogram \n");
+//                 hHistogram (countryNames, totalAllCountries);
+//                 break;
                 
-            case 5:
-                printf ("Searching for which country? ");
-                scanf (" %s", name);
+//             case 5:
+//                 printf ("Searching for which country? ");
+//                 scanf (" %s", name);
                 
-                int countM = searchCountry (name, countryNames, totalAllCountries);
+//                 int countM = searchCountry (name, countryNames, totalAllCountries);
                 
-                if (countM != -1) {
-                    printf ("Found it - %s has a total of %d medals\n", name, countM);
-                }
-                else {
-                    printf ("Country name not found in this database\n");
-                }
+//                 if (countM != -1) {
+//                     printf ("Found it - %s has a total of %d medals\n", name, countM);
+//                 }
+//                 else {
+//                     printf ("Country name not found in this database\n");
+//                 }
                 
-                break;
-            case 6:
-                printf ("Rank top three Based on total number of medals\n");
+//                 break;
+//             case 6:
+//                 printf ("Rank top three Based on total number of medals\n");
                 
-                rankTopThreeByTotal (totalAllCountries, countryNames);
-                break;
-            case 7:
-                printf ("Rank top three Based on Gold medals\n");
+//                 rankTopThreeByTotal (totalAllCountries, countryNames);
+//                 break;
+//             case 7:
+//                 printf ("Rank top three Based on Gold medals\n");
                 
-                rankTopThreeByMedal (country, countryNames);
-                break;
-            case 8:
-                printf ("Which medal do you want to look for - Type 0 for Gold, 1 for Silver, 2 for Bronze? ");
-                scanf ("%d", &whichMedal);
+//                 rankTopThreeByMedal (country, countryNames);
+//                 break;
+//             case 8:
+//                 printf ("Which medal do you want to look for - Type 0 for Gold, 1 for Silver, 2 for Bronze? ");
+//                 scanf ("%d", &whichMedal);
                 
-                printf ("Number of countries with no ");
+//                 printf ("Number of countries with no ");
                 
-                switch (whichMedal) {
+//                 switch (whichMedal) {
                         
-                    case 0: printf ("Gold ");
-                        break;
+//                     case 0: printf ("Gold ");
+//                         break;
                         
-                    case 1: printf ("Silver ");
-                        break;
+//                     case 1: printf ("Silver ");
+//                         break;
                         
-                    case 2: printf ("Bronze ");
-                        break;
-                }
+//                     case 2: printf ("Bronze ");
+//                         break;
+//                 }
                 
-                totalM = findAllWithNoXMedals (country, whichMedal, indexOfCountries);
+//                 totalM = findAllWithNoXMedals (country, whichMedal, indexOfCountries);
                 
-                printf ("medals = %d \n", totalM);
+//                 printf ("medals = %d \n", totalM);
                 
-                for (int i = 0; i < COUNTRIES; i++) {
+//                 for (int i = 0; i < COUNTRIES; i++) {
                     
-                    if (indexOfCountries [i] != -1) {
-                        printf ("%s \n", countryNames [i]);
-                    }
-                }
+//                     if (indexOfCountries [i] != -1) {
+//                         printf ("%s \n", countryNames [i]);
+//                     }
+//                 }
 
-                break;
-            case 9:
-                printf ("Which medal do you want to look for - Type 0 for Gold, 1 for Silver, 2 for Bronze? ");
-                scanf ("%d", &whichMedal);
+//                 break;
+//             case 9:
+//                 printf ("Which medal do you want to look for - Type 0 for Gold, 1 for Silver, 2 for Bronze? ");
+//                 scanf ("%d", &whichMedal);
                 
-                printf ("Number of countries with ONLY ");
+//                 printf ("Number of countries with ONLY ");
                 
-                switch (whichMedal) {
+//                 switch (whichMedal) {
                         
-                    case 0: printf ("Gold ");
-                        break;
+//                     case 0: printf ("Gold ");
+//                         break;
                         
-                    case 1: printf ("Silver ");
-                        break;
+//                     case 1: printf ("Silver ");
+//                         break;
                         
-                    case 2: printf ("Bronze ");
-                        break;
-                }
+//                     case 2: printf ("Bronze ");
+//                         break;
+//                 }
                 
-                totalM = findAllWithOnlyXMedals (country, whichMedal, indexOfCountries);
+//                 totalM = findAllWithOnlyXMedals (country, whichMedal, indexOfCountries);
                 
-                printf ("medals = %d \n", totalM);
+//                 printf ("medals = %d \n", totalM);
                 
-                for (int i = 0; i < COUNTRIES; i++) {
+//                 for (int i = 0; i < COUNTRIES; i++) {
                     
-                    if (indexOfCountries [i] != -1) {
-                        printf ("%s \n", countryNames [i]);
-                    }
-                }
+//                     if (indexOfCountries [i] != -1) {
+//                         printf ("%s \n", countryNames [i]);
+//                     }
+//                 }
                 
-                break;
-            case 10:
-                printf ("Do you want min (enter 1) or max (enter 2)? ");
-                scanf ("%d", &minOrMax);
+//                 break;
+//             case 10:
+//                 printf ("Do you want min (enter 1) or max (enter 2)? ");
+//                 scanf ("%d", &minOrMax);
                 
-                cIndex = findCountryIndexWithMinOrMaxLength (minOrMax, countryNames);
+//                 cIndex = findCountryIndexWithMinOrMaxLength (minOrMax, countryNames);
                 
-                printf ("The country name with ");
+//                 printf ("The country name with ");
                 
-                switch (minOrMax) {
+//                 switch (minOrMax) {
                         
-                    case 1: printf ("minimum "); break;
-                    case 2: printf ("maximum "); break;
-                }
+//                     case 1: printf ("minimum "); break;
+//                     case 2: printf ("maximum "); break;
+//                 }
                 
-                printf ("length = %s\n", countryNames [cIndex]);
-                break;
+//                 printf ("length = %s\n", countryNames [cIndex]);
+//                 break;
              
-           /* case 11:
-                printf ("Printing Vertical Histogram \n");
-                vHistogram (countryNames, totalAllCountries);
-                break;
-             */
-            case 11: printf ("Ok Bye for now\n");
-                break;
-            default: printf ("That is an invalid choice\n");
+//            /* case 11:
+//                 printf ("Printing Vertical Histogram \n");
+//                 vHistogram (countryNames, totalAllCountries);
+//                 break;
+//              */
+//             case 11: printf ("Ok Bye for now\n");
+//                 break;
+//             default: printf ("That is an invalid choice\n");
                 
-        }
+//         }
         
-    } while (choice != 11);
+//     } while (choice != 11);
     
     
-   return 0;
-}
+//    return 0;
+// }
 
 void readFromFile (char fName [30], int country [COUNTRIES][MEDALCAT], char countryNames [COUNTRIES][100]) {
     
@@ -565,57 +564,57 @@ int findCountryIndexWithMinOrMaxLength (int minOrMax, char countryNames [COUNTRI
 
 // this was a student's code - NEEDS TO BE FIXED
 
-//intializes function, passes down arguments countryNames and totalMedals
-void vHistogram (char countryNames [COUNTRIES][MAX_LENGTH_CNAME], int totalMedals[COUNTRIES]){
+// //intializes function, passes down arguments countryNames and totalMedals
+// void vHistogram (char countryNames [COUNTRIES][MAX_LENGTH_CNAME], int totalMedals[COUNTRIES]){
     
-    int maxMedals = 0, maxMedalsR = 0; //initializes variable and sets it to zero
-    int totalMedalsR [COUNTRIES] = {0};
+//     int maxMedals = 0, maxMedalsR = 0; //initializes variable and sets it to zero
+//     int totalMedalsR [COUNTRIES] = {0};
     
-    printf("    "); //prints 4 blank spaces
+//     printf("    "); //prints 4 blank spaces
     
-    //loops through every country
-    for (int i = 0; i < COUNTRIES; i++) {
-        printf("%-11d", totalMedals[i]); //prints the total amount of medals of each country
+//     //loops through every country
+//     for (int i = 0; i < COUNTRIES; i++) {
+//         printf("%-11d", totalMedals[i]); //prints the total amount of medals of each country
         
-        if (totalMedals[i] > maxMedals) { //if the total amount of medals is greater than maxMedals
-            maxMedals = totalMedals[i]; //maxMedals is set to the total amount of medals of that country
-        }
-    }
+//         if (totalMedals[i] > maxMedals) { //if the total amount of medals is greater than maxMedals
+//             maxMedals = totalMedals[i]; //maxMedals is set to the total amount of medals of that country
+//         }
+//     }
     
-    printf("\n"); //print and newline
+//     printf("\n"); //print and newline
     
-    maxMedalsR = (int) round (maxMedals / 2.0);
+//     maxMedalsR = (int) round (maxMedals / 2.0);
     
-    for(int j = 0; j < COUNTRIES; j++) {
+//     for(int j = 0; j < COUNTRIES; j++) {
         
-        totalMedalsR [j] = (int) round (totalMedals [j] / 2.0);
-    }
+//         totalMedalsR [j] = (int) round (totalMedals [j] / 2.0);
+//     }
     
-    //loops starting with the country with the most amount of medals decreaments to zero
-    for (int i = maxMedalsR; i >= 0; i--) {
+//     //loops starting with the country with the most amount of medals decreaments to zero
+//     for (int i = maxMedalsR; i >= 0; i--) {
         
-        printf ("    ");
-        //loops through every country
-        for(int j = 0; j < COUNTRIES; j++) {
-            if (totalMedalsR [j] > i) { //if the country's total medals are greater or equal to i
-                printf("%-11c", '*'); //outputs a star
-            }
-            else { //if not
-                printf("%-11c", ' '); //outputs a space
-            }
-        }
-        printf("\n"); //prints two new lines
-    }
+//         printf ("    ");
+//         //loops through every country
+//         for(int j = 0; j < COUNTRIES; j++) {
+//             if (totalMedalsR [j] > i) { //if the country's total medals are greater or equal to i
+//                 printf("%-11c", '*'); //outputs a star
+//             }
+//             else { //if not
+//                 printf("%-11c", ' '); //outputs a space
+//             }
+//         }
+//         printf("\n"); //prints two new lines
+//     }
     
-    printf("   "); //prints 3 blank spances
+//     printf("   "); //prints 3 blank spances
     
-    //loops through every country
-    for (int i = 0; i < COUNTRIES; i++){
-        printf("%-11s", countryNames[i]); //outputs each country
-    }
+//     //loops through every country
+//     for (int i = 0; i < COUNTRIES; i++){
+//         printf("%-11s", countryNames[i]); //outputs each country
+//     }
     
-    printf("\n"); //prints a newline
-}
+//     printf("\n"); //prints a newline
+// }
 
 
 

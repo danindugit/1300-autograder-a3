@@ -1,0 +1,18 @@
+DNA: TAAT 
+mRNA: AUUA translates to: 
+AUU : I 
+
+
+DNA: CCTAGTTT 
+mRNA: GGAUCAAA translates to: 
+GGA : G 
+UCA : S 
+
+
+DNA: CGTAGGCAT 
+mRNA: GCAUCCGUA translates to: 
+GCA : A 
+UCC : S 
+GUA : V 
+
+
