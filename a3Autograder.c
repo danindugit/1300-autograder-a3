@@ -33,6 +33,7 @@ int main (int argc, char * argv[]) {
 
 
     //marks
+    int readFromFileMark = 10;
 
 
     // ----------- Testing isBasePair ----------- // 
