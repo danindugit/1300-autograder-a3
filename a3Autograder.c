@@ -20,23 +20,72 @@ int findAllWithNoXMedals (int country [COUNTRIES] [MEDALCAT],int indexMedal, int
 int findAllWithOnlyXMedals (int country [COUNTRIES][MEDALCAT],int indexMedal, int indexOfCountries [COUNTRIES]);
 int findCountryIndexWithMinOrMaxLength (int minOrMax, char countryNames [COUNTRIES][100]);
 
+void readFromFileExpected (char fName [30], int country [COUNTRIES][MEDALCAT], char countryNames [COUNTRIES][100]) {
+    
+    int row;
+    FILE * fPtr = fopen (fName, "r");
+    row = 0;
+    
+    while (!feof (fPtr)) {
+        
+        fscanf (fPtr, "%s %d %d %d\n", countryNames [row], &country [row] [0], &country [row] [1], &country [row] [2]);
+        row++;
+    }
+    
+}
+
 
 int main (int argc, char * argv[]) {
 
     fprintf(stderr, "Welcome to the A3 Autograder\n");
 
+    int country [COUNTRIES][MEDALCAT];   
+    int totalAllMedals [MEDALCAT];
+    int row, maxMedal, whichMedal, totalM;
+    int totalAllCountries [COUNTRIES];
+    char countryNames [COUNTRIES][100];
+    char name [100];
+    int indexOfCountries [COUNTRIES];
+    int cIndex, minOrMax;
+    int choice;
+
     //results
 
-    char inputString[100][100];
 
     //expected
+    int countryExpected [COUNTRIES][3];
+    char countryNamesExpected [COUNTRIES][100];
 
 
     //marks
     int readFromFileMark = 10;
 
 
-    // ----------- Testing isBasePair ----------- // 
+    // ----------- Testing readFromFile ----------- // 
+    
+    fprintf(stderr, "TESTING readFromFile (10)\n");
+
+    readFromFileExpected(argv[1], countryExpected, countryNamesExpected);
+    readFromFile(argv[1], country, countryNames);
+    for (int i = 0; i < COUNTRIES; i++) {    
+        if (strcmp(countryNames[i], countryNamesExpected[i]) != 0) {
+            fprintf(stderr, "TEST CASE FAILED\nCountry name -- %s != %s\n", countryNames[i], countryNamesExpected[i]);
+            readFromFileMark -= 1;
+        }
+        for (int j = 0; j < MEDALCAT; j++){
+            if (country[i][j] != countryExpected[i][j]) {
+                fprintf(stderr, "TEST CASE FAILED\nCountry: %s Medal: %d != %d\n", countryNames[i], country[i][j], countryExpected[i][j]);
+                readFromFileMark -= 1;    
+            }
+        }
+    }
+
+    if (readFromFileMark < 0) {
+        readFromFileMark = 0;
+    }
+    fprintf(stderr, "%d/10\n", readFromFileMark);
+
+    // ----------- Testing readFromFile ----------- // 
 
 
  
