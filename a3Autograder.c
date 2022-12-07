@@ -43,6 +43,194 @@ void readFromFileExpected(char fName[30], int country[COUNTRIES][MEDALCAT], char
     }
 }
 
+void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[COUNTRIES][100])
+{
+    int currentMax, currentIndex;
+
+    for (int i = 0; i < 3; i++)
+    {
+        findMax(totalMedals, &currentMax, &currentIndex);
+
+        printf("%s (%d)\n", countryNames[currentIndex], totalMedals[currentIndex]);
+        totalMedals[currentIndex] = -1000;
+    }
+
+    return;
+}
+
+void rankTopThreeByMedalExpected(int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100])
+{
+    int gold[COUNTRIES];
+
+    int currentMax, currentIndex;
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        gold[i] = country[i][0];
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        findMax(gold, &currentMax, &currentIndex);
+
+        printf("%s (%d)\n", countryNames[currentIndex], gold[currentIndex]);
+        gold[currentIndex] = -1000;
+    }
+}
+
+int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES])
+{
+    int total = 0;
+
+    int gold[COUNTRIES], silver[COUNTRIES], bronze[COUNTRIES];
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        indexOfCountries[i] = -1;
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        gold[i] = country[i][0];
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        silver[i] = country[i][1];
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        bronze[i] = country[i][2];
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+
+        switch (indexMedal)
+        {
+
+        case 0:
+            if (gold[i] == 0)
+            {
+                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                total++;
+            }
+            break;
+        case 1:
+            if (silver[i] == 0)
+            {
+                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                total++;
+            }
+            break;
+
+        case 2:
+            if (bronze[i] == 0)
+            {
+                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                total++;
+            }
+            break;
+        }
+    }
+    return total;
+}
+
+int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES])
+{
+    int total = 0;
+
+    int gold[COUNTRIES], silver[COUNTRIES], bronze[COUNTRIES];
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        indexOfCountries[i] = -1;
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        gold[i] = country[i][0];
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        silver[i] = country[i][1];
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        bronze[i] = country[i][2];
+    }
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+
+        switch (indexMedal)
+        {
+
+        case 0:
+            if (gold[i] >= 0 && silver[i] == 0 && bronze[i] == 0)
+            {
+                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                total++;
+            }
+            break;
+        case 1:
+            if (gold[i] == 0 && silver[i] >= 0 && bronze[i] == 0)
+            {
+                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                total++;
+            }
+            break;
+
+        case 2:
+            if (gold[i] == 0 && silver[i] == 0 && bronze[i] >= 0)
+            {
+                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                total++;
+            }
+            break;
+        }
+    }
+
+    return total;
+}
+
+int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100])
+{
+    int m = strlen(countryNames[0]);
+    int index;
+
+    if (minOrMax == 1)
+    { // for min
+
+        for (int i = 0; i < COUNTRIES; i++)
+        {
+
+            if (strlen(countryNames[i]) < m)
+            {
+                m = strlen(countryNames[i]);
+                index = i;
+            }
+        }
+    }
+    else
+    { // for max
+        for (int i = 0; i < COUNTRIES; i++)
+        {
+
+            if (strlen(countryNames[i]) > m)
+            {
+                m = strlen(countryNames[i]);
+                index = i;
+            }
+        }
+    }
+
+    return index;
+}
+
 int main(int argc, char *argv[])
 {
 
