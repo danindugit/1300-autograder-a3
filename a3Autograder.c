@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 
     // results
     int findAllWithNoXMedalsResult = 0;
+    int findAllWithOnlyXMedalsResult = 0;
 
     // expected
     int countryExpected[COUNTRIES][3];
@@ -62,6 +63,7 @@ int main(int argc, char *argv[])
     double rankTopThreeByTotalMark = 0;
     double rankTopThreeByMedalMark = 0;
     int findAllWithNoXMedalsMark = 0;
+    int findAllWithOnlyXMedalsMark = 0;
 
     // ----------- Testing readFromFile ----------- //
 
@@ -147,7 +149,7 @@ int main(int argc, char *argv[])
         // expected indices: 12, 13, 14
         for (int i = 0; i < findAllWithNoXMedalsResult; i++)
         {
-            if (indexOfCountries == 12 || indexOfCountries == 13 || indexOfCountries == 14)
+            if (indexOfCountries[i] == 12 || indexOfCountries[i] == 13 || indexOfCountries[i] == 14)
             {
                 findAllWithNoXMedalsMark++;
             }
@@ -165,7 +167,7 @@ int main(int argc, char *argv[])
         // expected indices: 9, 11, 13
         for (int i = 0; i < findAllWithNoXMedalsResult; i++)
         {
-            if (indexOfCountries == 9 || indexOfCountries == 11 || indexOfCountries == 13)
+            if (indexOfCountries[i] == 9 || indexOfCountries[i] == 11 || indexOfCountries[i] == 13)
             {
                 findAllWithNoXMedalsMark++;
             }
@@ -183,7 +185,7 @@ int main(int argc, char *argv[])
         // expected indices: 10, 11, 14
         for (int i = 0; i < findAllWithNoXMedalsResult; i++)
         {
-            if (indexOfCountries == 10 || indexOfCountries == 11 || indexOfCountries == 14)
+            if (indexOfCountries[i] == 10 || indexOfCountries[i] == 11 || indexOfCountries[i] == 14)
             {
                 findAllWithNoXMedalsMark++;
             }
@@ -192,6 +194,58 @@ int main(int argc, char *argv[])
     fprintf(stderr, "Mark for findAllWithNoXMedals = %d\n", findAllWithNoXMedalsMark);
 
     // ----------- Testing findAllWithNoXMedals ----------- //
+
+    // ----------- Testing findAllWithOnlyXMedals ----------- //
+
+    fprintf(stderr, "TESTING findAllWithOnlyXMedals (12)\n");
+    // gold
+    findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 1, indexOfCountries);
+    if (findAllWithOnlyXMedalsResult != 1)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
+    }
+    else
+    {
+        findAllWithOnlyXMedalsMark += 2;
+        // expected index = 11
+        if (indexOfCountries[0] == 11)
+        {
+            findAllWithOnlyXMedalsMark += 2;
+        }
+    }
+    // silver
+    findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 2, indexOfCountries);
+    if (findAllWithOnlyXMedalsResult != 1)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
+    }
+    else
+    {
+        findAllWithOnlyXMedalsMark += 2;
+        // expected index = 14
+        if (indexOfCountries[0] == 14)
+        {
+            findAllWithOnlyXMedalsMark += 2;
+        }
+    }
+    // bronze
+    findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 3, indexOfCountries);
+    if (findAllWithOnlyXMedalsResult != 1)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
+    }
+    else
+    {
+        findAllWithOnlyXMedalsMark += 2;
+        // expected index = 13
+        if (indexOfCountries[0] == 13)
+        {
+            findAllWithOnlyXMedalsMark += 2;
+        }
+    }
+    fprintf(stderr, "Mark for findAllWithOnlyXMedals = %d\n", findAllWithOnlyXMedalsMark);
+
+    // ----------- Testing findAllWithOnlyXMedals ----------- //
 
     //     // ----------- Printing Mark ----------- //
 
