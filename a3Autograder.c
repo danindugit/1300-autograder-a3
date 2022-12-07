@@ -28,6 +28,26 @@ int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMeda
 int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES]);
 int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100]);
 
+// helpers
+void findMax(int arr[COUNTRIES], int *maxValue, int *maxIndex);
+
+void findMax(int arr[COUNTRIES], int *maxValue, int *maxIndex)
+{
+
+    *maxValue = arr[0];
+
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+
+        if (arr[i] >= *maxValue)
+        {
+
+            *maxValue = arr[i];
+            *maxIndex = i;
+        }
+    }
+}
+
 void readFromFileExpected(char fName[30], int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100])
 {
 
