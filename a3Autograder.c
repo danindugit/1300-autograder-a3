@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
         scanf("%lf", &rankTopThreeByTotalMark);
         if (rankTopThreeByTotalMark < 0 || rankTopThreeByTotalMark > 8)
         {
-            printf("Please enter a valid number betwen 0 and 8\n");
+            fprintf(stderr, "Please enter a valid number betwen 0 and 8\n");
         }
     } while (rankTopThreeByTotalMark < 0 || rankTopThreeByTotalMark > 8);
 
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
         scanf("%lf", &rankTopThreeByMedalMark);
         if (rankTopThreeByMedalMark < 0 || rankTopThreeByMedalMark > 8)
         {
-            printf("Please enter a valid number betwen 0 and 8\n");
+            fprintf(stderr, "Please enter a valid number betwen 0 and 8\n");
         }
     } while (rankTopThreeByMedalMark < 0 || rankTopThreeByMedalMark > 8);
 
