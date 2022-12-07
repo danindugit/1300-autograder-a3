@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
     // marks
     int readFromFileMark = 10;
     double rankTopThreeByTotalMark = 0;
+    double rankTopThreeByMedalMark = 0;
 
     // ----------- Testing readFromFile ----------- //
 
@@ -109,6 +110,25 @@ int main(int argc, char *argv[])
     } while (rankTopThreeByTotalMark < 0 || rankTopThreeByTotalMark > 8);
 
     // ----------- Testing rankTopThreeByTotal ----------- //
+
+    // ----------- Testing rankTopThreeByMedal ----------- //
+
+    fprintf(stderr, "TESTING rankTopThreeByMedal (8)\n");
+    fprintf(stderr, "Student's Output:\n");
+    rankTopThreeByMedal(country, countryNames);
+    fprintf(stderr, "\nExpected Ouput:\n");
+    fprintf(stderr, "Australia (67)\nEngland (57)\nCanada (26)\n");
+    fprintf(stderr, "Please assign a grade out of 8 for how well the student's output matches the expected output:\n");
+    do
+    {
+        scanf("%lf", &rankTopThreeByMedalMark);
+        if (rankTopThreeByMedalMark < 0 || rankTopThreeByMedalMark > 8)
+        {
+            printf("Please enter a valid number betwen 0 and 8\n");
+        }
+    } while (rankTopThreeByMedalMark < 0 || rankTopThreeByMedalMark > 8);
+
+    // ----------- Testing rankTopThreeByMedal ----------- //
 
     //     // ----------- Printing Mark ----------- //
 
