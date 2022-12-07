@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
     int choice;
 
     // results
+    int findAllWithNoXMedalsResult = 0;
 
     // expected
     int countryExpected[COUNTRIES][3];
@@ -60,6 +61,7 @@ int main(int argc, char *argv[])
     int readFromFileMark = 10;
     double rankTopThreeByTotalMark = 0;
     double rankTopThreeByMedalMark = 0;
+    int findAllWithNoXMedalsMark = 0;
 
     // ----------- Testing readFromFile ----------- //
 
@@ -129,6 +131,67 @@ int main(int argc, char *argv[])
     } while (rankTopThreeByMedalMark < 0 || rankTopThreeByMedalMark > 8);
 
     // ----------- Testing rankTopThreeByMedal ----------- //
+
+    // ----------- Testing findAllWithNoXMedals ----------- //
+
+    fprintf(stderr, "TESTING findAllWithNoXMedals (12)\n");
+    // gold
+    findAllWithNoXMedalsResult = findAllWithNoXMedals(country, 1, indexOfCountries);
+    if (findAllWithNoXMedalsResult != 3)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithNoXMedalsResult);
+    }
+    else
+    {
+        findAllWithNoXMedalsMark++;
+        // expected indices: 12, 13, 14
+        for (int i = 0; i < findAllWithNoXMedalsResult; i++)
+        {
+            if (indexOfCountries == 12 || indexOfCountries == 13 || indexOfCountries == 14)
+            {
+                findAllWithNoXMedalsMark++;
+            }
+        }
+    }
+    // silver
+    findAllWithNoXMedalsResult = findAllWithNoXMedals(country, 2, indexOfCountries);
+    if (findAllWithNoXMedalsResult != 3)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithNoXMedalsResult);
+    }
+    else
+    {
+        findAllWithNoXMedalsMark++;
+        // expected indices: 9, 11, 13
+        for (int i = 0; i < findAllWithNoXMedalsResult; i++)
+        {
+            if (indexOfCountries == 9 || indexOfCountries == 11 || indexOfCountries == 13)
+            {
+                findAllWithNoXMedalsMark++;
+            }
+        }
+    }
+    // bronze
+    findAllWithNoXMedalsResult = findAllWithNoXMedals(country, 3, indexOfCountries);
+    if (findAllWithNoXMedalsResult != 3)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithNoXMedalsResult);
+    }
+    else
+    {
+        findAllWithNoXMedalsMark++;
+        // expected indices: 10, 11, 14
+        for (int i = 0; i < findAllWithNoXMedalsResult; i++)
+        {
+            if (indexOfCountries == 10 || indexOfCountries == 11 || indexOfCountries == 14)
+            {
+                findAllWithNoXMedalsMark++;
+            }
+        }
+    }
+    fprintf(stderr, "Mark for findAllWithNoXMedals = %d\n", findAllWithNoXMedalsMark);
+
+    // ----------- Testing findAllWithNoXMedals ----------- //
 
     //     // ----------- Printing Mark ----------- //
 
