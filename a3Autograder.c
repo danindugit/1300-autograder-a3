@@ -5,6 +5,7 @@
 #include <math.h>
 
 #define COUNTRIES 15
+#define COUNTRIESTEST 16
 #define MEDALCAT 3
 #define MAX_LENGTH_CNAME 100
 
@@ -31,7 +32,7 @@ void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[C
 void rankTopThreeByMedalExpected(int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100]);
 int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES]);
 int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES]);
-int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100]);
+int *findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100]);
 
 // Test functions
 double readFromFileTest(char *filename, int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100]);
@@ -41,6 +42,7 @@ double hHistogramTest(char countryNames[COUNTRIES][100], char countryNamesExpect
 double searchCountryTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
 double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES]);
 double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES]);
+double findCountryIndexWithMinOrMaxLengthTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100]);
 
 // Helper functions
 int findElement(int a[], int size, int item);
@@ -77,6 +79,7 @@ int main(int argc, char *argv[])
     double rankTopThreeByMedalMark = 8;
     double findAllWithNoXMedalsMark = 12;
     double findAllWithOnlyXMedalsMark = 12;
+    double findCountryIndexWithMinOrMaxLengthMark = 8;
 
     // ----------- Testing readFromFile ----------- //
 
@@ -143,6 +146,10 @@ int main(int argc, char *argv[])
     // ----------- Testing findAllWithOnlyXMedals ----------- //
 
     // ----------- Testing findCountryIndexWithMinOrMaxLength  ----------- //
+
+    fprintf(stderr, "TESTING findCountryIndexWithMinOrMaxLength (8)\n");
+    findCountryIndexWithMinOrMaxLengthMark = findCountryIndexWithMinOrMaxLengthTest(countryNames, countryNamesExpected);
+    fprintf(stderr, "%.1lf/8\n", findCountryIndexWithMinOrMaxLengthMark);
 
     // ----------- Testing findCountryIndexWithMinOrMaxLength  ----------- //
 
@@ -463,10 +470,11 @@ int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMe
     return total;
 }
 
-int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100])
+int *findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100])
 {
     int m = strlen(countryNames[0]);
-    int index;
+    int index[COUNTRIESTEST];
+    int count = 0;
 
     if (minOrMax == 1)
     { // for min
@@ -477,7 +485,8 @@ int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[C
             if (strlen(countryNames[i]) < m)
             {
                 m = strlen(countryNames[i]);
-                index = i;
+                index[count] = i;
+                count++;
             }
         }
     }
@@ -489,10 +498,14 @@ int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[C
             if (strlen(countryNames[i]) > m)
             {
                 m = strlen(countryNames[i]);
-                index = i;
+                index[count] = i;
+                count++;
             }
         }
     }
+
+    // make the last element -1
+    index[count] = -1;
 
     return index;
 }
@@ -740,6 +753,37 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
     if (mark < 0)
     {
         mark = 0;
+    }
+
+    return mark;
+}
+
+double findCountryIndexWithMinOrMaxLengthTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100])
+{
+    double mark = 0;
+    int studentReturn;
+    int minExpectedReturns[COUNTRIES] = findCountryIndexWithMinOrMaxLengthExpected(1, countryNamesExpected);
+    int maxExpectedReturns[COUNTRIES] = findCountryIndexWithMinOrMaxLengthExpected(2, countryNamesExpected);
+    int count;
+
+    count = 0;
+    while (minExpectedReturns[count] != -1)
+    {
+        if (minExpectedReturns[count] == studentReturn)
+        {
+            mark += 4;
+            break;
+        }
+    }
+
+    count = 0;
+    while (maxExpectedReturns[count] != -1)
+    {
+        if (maxExpectedReturns[count] == studentReturn)
+        {
+            mark += 4;
+            break;
+        }
     }
 
     return mark;
