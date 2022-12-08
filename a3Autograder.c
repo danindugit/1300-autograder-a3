@@ -24,6 +24,7 @@ int findCountryIndexWithMinOrMaxLength(int minOrMax, char countryNames[COUNTRIES
 // solution functions
 void readFromFileExpected(char fName[30], int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100]);
 void findTotalPerCountryExpected(int country [COUNTRIES][MEDALCAT], int totalAllCountries [COUNTRIES]);
+int findTotalPerMedalExpected(int country [COUNTRIES][MEDALCAT], int totalAllMedals [MEDALCAT], int * whichMedal);
 void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[COUNTRIES][100]);
 void rankTopThreeByMedalExpected(int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100]);
 int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES]);
@@ -33,6 +34,7 @@ int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[C
 //Test functions
 double readFromFileTest(char* filename, int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100]);
 double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES], char countryNamesExpected[COUNTRIES][100]);
+double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllMedals[MEDALCAT], int totalAllMedalsExpected[MEDALCAT]);
 
 
 int main(int argc, char *argv[]) {
@@ -57,6 +59,7 @@ int main(int argc, char *argv[]) {
     int countryExpected[COUNTRIES][3];
     char countryNamesExpected[COUNTRIES][100];
     int totalAllCountriesExpected[COUNTRIES];
+    int totalAllMedalsExpected[MEDALCAT];
 
     // marks
     double readFromFileMark = 10.0;
@@ -81,6 +84,9 @@ int main(int argc, char *argv[]) {
 
     // ----------- Testing findTotalPerMedal ----------- //
 
+    fprintf(stderr, "TESTING findTotalPerMedal (6)\n");
+    findTotalPerMedalMark = findTotalPerMedalTest(country, countryExpected, totalAllMedals, totalAllMedalsExpected);
+    fprintf(stderr, "%.1lf/6\n", findTotalPerMedalMark);
 
     // ----------- Testing hHistogram ----------- //
 
@@ -323,6 +329,39 @@ void findTotalPerCountryExpected(int country [COUNTRIES][MEDALCAT], int totalAll
    return ;
 }
 
+int findTotalPerMedalExpected(int country [COUNTRIES][MEDALCAT], int totalAllMedals [MEDALCAT], int * whichMedal)
+{
+   int max;
+    int i, j;
+    
+   printf ("In findTotalPerMedal\n");
+    
+    for (j = 0; j < MEDALCAT; j++) {
+        
+        totalAllMedals [j] = 0;
+    }
+   
+    for (i = 0; i < COUNTRIES; i++) {
+        for (j = 0; j < MEDALCAT; j++) {
+   
+          totalAllMedals [j] += country [i][j];
+        }
+    }
+   
+   max = totalAllMedals [0];
+   *whichMedal = 0;
+   
+   for (int i = 0; i < MEDALCAT; i++) {
+   
+      if (totalAllMedals [i] >= max) {
+      
+         max = totalAllMedals [i];
+         *whichMedal = i;
+      }
+   }
+   return max;
+}
+
 void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[COUNTRIES][100])
 {
     int currentMax, currentIndex;
@@ -541,7 +580,7 @@ double readFromFileTest(char* filename, int country[COUNTRIES][MEDALCAT], int co
 }
 
 double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES], char countryNamesExpected[COUNTRIES][100]) {
-    double findTotalPerCountryMark = 10.0;
+    double findTotalPerCountryMark = 8.0;
     findTotalPerCountryExpected(countryExpected, totalAllCountriesExpected);
     findTotalPerCountry(country, totalAllCountries);
 
@@ -560,3 +599,22 @@ double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpe
 
     return findTotalPerCountryMark;
 }
+
+double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllMedals[MEDALCAT], int totalAllMedalsExpected[MEDALCAT]) {
+    double findTotalPerMedalMark = 6.0;
+    char medals[3][100] = {"Gold", "Silver", "Bronze"};
+    int choice = 1;
+    int outputExpected = findTotalPerMedalExpected(countryExpected, totalAllMedalsExpected, &choice);
+    int output = findTotalPerMedal(country, totalAllMedals, &choice);
+
+    for (int i = 0; i < MEDALCAT; i++) {
+        if (totalAllMedals[i] != totalAllMedalsExpected[i])
+            {
+                fprintf(stderr, "TEST CASE FAILED\n%s: %d != %d\n", medals[i], totalAllMedals[i], totalAllMedalsExpected[i]);
+                findTotalPerMedalMark -= 2.0;
+            }
+    }
+
+    return findTotalPerMedalMark;
+}
+

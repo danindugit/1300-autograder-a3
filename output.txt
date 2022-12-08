@@ -1,5 +1,7 @@
 In findTotal
 In findTotal
+In findTotalPerMedal
+In findTotalPerMedal
 TESTING RANK TO 3 BY TOTAL
 Australia (178)
 England (176)
