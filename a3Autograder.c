@@ -25,6 +25,7 @@ int findCountryIndexWithMinOrMaxLength(int minOrMax, char countryNames[COUNTRIES
 void readFromFileExpected(char fName[30], int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100]);
 void findTotalPerCountryExpected(int country [COUNTRIES][MEDALCAT], int totalAllCountries [COUNTRIES]);
 int findTotalPerMedalExpected(int country [COUNTRIES][MEDALCAT], int totalAllMedals [MEDALCAT], int * whichMedal);
+void hHistogramExpected(char countryNames [COUNTRIES][100], int totalAllCountries[COUNTRIES]);
 void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[COUNTRIES][100]);
 void rankTopThreeByMedalExpected(int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100]);
 int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES]);
@@ -35,6 +36,7 @@ int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[C
 double readFromFileTest(char* filename, int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100]);
 double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES], char countryNamesExpected[COUNTRIES][100]);
 double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllMedals[MEDALCAT], int totalAllMedalsExpected[MEDALCAT]);
+double hHistogramTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
 
 
 int main(int argc, char *argv[]) {
@@ -65,6 +67,7 @@ int main(int argc, char *argv[]) {
     double readFromFileMark = 10.0;
     double findTotalPerCountryMark = 8.0;
     double findTotalPerMedalMark = 6.0;
+    double hHistogramMark = 10.0;
     double rankTopThreeByTotalMark = 0;
     double rankTopThreeByMedalMark = 0;
     int findAllWithNoXMedalsMark = 0;
@@ -90,6 +93,9 @@ int main(int argc, char *argv[]) {
 
     // ----------- Testing hHistogram ----------- //
 
+    fprintf(stderr, "TESTING hHistogram (10)\n");
+    hHistogramMark = hHistogramTest(countryNames, countryNamesExpected, totalAllCountries, totalAllCountriesExpected);
+    fprintf(stderr, "%.1lf/10\n", hHistogramMark);
 
     // ----------- Testing searchCountry ----------- //
 
@@ -98,9 +104,9 @@ int main(int argc, char *argv[]) {
 
     fprintf(stderr, "TESTING rankTopThreeByTotal (8)\n");
     fprintf(stderr, "Student's Output:\n");
-    printf("TESTING RANK TO 3 BY TOTAL\n");
+    fprintf(stdout,"TESTING RANK TO 3 BY TOTAL\n");
     rankTopThreeByTotal(totalAllCountries, countryNames);
-    printf("TESTING RANK TO 3 BY TOTAL\n");
+    fprintf(stdout,"TESTING RANK TO 3 BY TOTAL\n");
     fprintf(stderr, "\nExpected Ouput:\n");
     fprintf(stderr, "Australia (178)\nEngland (176)\nCanada (92)\n");
     fprintf(stderr, "Please assign a grade out of 8 for how well the student's output matches the expected output:\n");
@@ -258,38 +264,38 @@ int main(int argc, char *argv[]) {
     //     int totalMarks = isBasePairMark + isItaDnaSequenceMark + reverseMark +
     //     complementItMark + isItPalindromeMark + isStrandDnaPalindromeMark + howManyMark + dnaToMrnaMark + 6;
 
-    //     printf("\n\n\n");
-    //     printf("Instant Zero: NONE\n");
-    //     printf("\tCode that fails to compile with flags (-Wall -std=c99)\n");
-    //     printf("\tCode uses global variables\n");
-    //     printf("\tCode uses goto statements\n");
-    //     printf("\tA main is submitted\n");
-    //     printf("\n");
-    //     printf("General Deductions: 0\n");
-    //     printf("\t-2.5 (5%%) for each unique warning\n");
-    //     printf("\t-5 (10%%) for incorrect filename (lastnameFirstnameA2.c)\n");
-    //     printf("\tLateness\n");
-    //     printf("\n");
-    //     printf("Style: 5/5\n");
-    //     printf("\t-2 Header comment\n");
-    //     printf("\t-1 Variable namming\n");
-    //     printf("\t-1 Commenting\n");
-    //     printf("\t-1 Consistent spacing / Readability\n");
-    //     printf("\n");
-    //     printf("Program Specifications: %d/45\n", totalMarks);
-    //     printf("\tisBasePair %d/4\n", isBasePairMark);
-    //     printf("\tisItaDnaSequence %d/8\n", isItaDnaSequenceMark);
-    //     printf("\treverse  %d/5\n", reverseMark);
-    //     printf("\tcomplementIt  %d/6\n", complementItMark);
-    //     printf("\tisItPalindrome %d/4\n", isItPalindromeMark);
-    //     printf("\tisStrandDnaPalindrome  %d/4\n", isStrandDnaPalindromeMark);
-    //     printf("\thowMany %d/3\n", howManyMark);
-    //     printf("\tdnaToMrna %d/5\n", dnaToMrnaMark);
-    //     printf("\ttranslateDnaToMrnaProteins  6/6\n");
-    //     printf("\n");
-    //     printf("TOTAL %d/50\n", totalMarks+5);
-    //     printf("\n");
-    //     printf("Marked by TA Or Brener\n");
+    //     fprintf(stdout,"\n\n\n");
+    //     fprintf(stdout,"Instant Zero: NONE\n");
+    //     fprintf(stdout,"\tCode that fails to compile with flags (-Wall -std=c99)\n");
+    //     fprintf(stdout,"\tCode uses global variables\n");
+    //     fprintf(stdout,"\tCode uses goto statements\n");
+    //     fprintf(stdout,"\tA main is submitted\n");
+    //     fprintf(stdout,"\n");
+    //     fprintf(stdout,"General Deductions: 0\n");
+    //     fprintf(stdout,"\t-2.5 (5%%) for each unique warning\n");
+    //     fprintf(stdout,"\t-5 (10%%) for incorrect filename (lastnameFirstnameA2.c)\n");
+    //     fprintf(stdout,"\tLateness\n");
+    //     fprintf(stdout,"\n");
+    //     fprintf(stdout,"Style: 5/5\n");
+    //     fprintf(stdout,"\t-2 Header comment\n");
+    //     fprintf(stdout,"\t-1 Variable namming\n");
+    //     fprintf(stdout,"\t-1 Commenting\n");
+    //     fprintf(stdout,"\t-1 Consistent spacing / Readability\n");
+    //     fprintf(stdout,"\n");
+    //     fprintf(stdout,"Program Specifications: %d/45\n", totalMarks);
+    //     fprintf(stdout,"\tisBasePair %d/4\n", isBasePairMark);
+    //     fprintf(stdout,"\tisItaDnaSequence %d/8\n", isItaDnaSequenceMark);
+    //     fprintf(stdout,"\treverse  %d/5\n", reverseMark);
+    //     fprintf(stdout,"\tcomplementIt  %d/6\n", complementItMark);
+    //     fprintf(stdout,"\tisItPalindrome %d/4\n", isItPalindromeMark);
+    //     fprintf(stdout,"\tisStrandDnaPalindrome  %d/4\n", isStrandDnaPalindromeMark);
+    //     fprintf(stdout,"\thowMany %d/3\n", howManyMark);
+    //     fprintf(stdout,"\tdnaToMrna %d/5\n", dnaToMrnaMark);
+    //     fprintf(stdout,"\ttranslateDnaToMrnaProteins  6/6\n");
+    //     fprintf(stdout,"\n");
+    //     fprintf(stdout,"TOTAL %d/50\n", totalMarks+5);
+    //     fprintf(stdout,"\n");
+    //     fprintf(stdout,"Marked by TA Or Brener\n");
 
     fprintf(stderr, "CONGRADULATIONS, finished marking this student!\n");
 
@@ -360,6 +366,24 @@ int findTotalPerMedalExpected(int country [COUNTRIES][MEDALCAT], int totalAllMed
       }
    }
    return max;
+}
+
+void hHistogramExpected(char countryNames [COUNTRIES][100], int totalAllCountries[COUNTRIES]){
+
+   printf ("In hHistogram\n");
+ 
+   for (int i = 0; i < COUNTRIES; i++) {
+      printf ("%-10s: ", countryNames [i]);
+      
+      for (int j = 0; j < round(totalAllCountries [i] / 2.0); j++) {
+          printf ("*");
+      }
+      
+      printf (" (%d)\n", totalAllCountries [i]);
+       //getchar();
+   }
+   
+   return ;
 }
 
 void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[COUNTRIES][100])
@@ -616,5 +640,17 @@ double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpect
     }
 
     return findTotalPerMedalMark;
+}
+
+double hHistogramTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]) {
+    double hHistogramMark = 10.0;
+
+    fprintf(stdout, "\n\nhHistogram Expected\n\n");
+    hHistogramExpected(countryNamesExpected, totalAllCountriesExpected);
+    fprintf(stdout, "\n\nhHistogram Student's output\n\n");
+    hHistogram(countryNames, totalAllCountries);
+    fprintf(stdout, "\n\n\n\n");
+
+    return hHistogramMark;
 }
 
