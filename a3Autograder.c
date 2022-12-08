@@ -108,28 +108,17 @@ int main(int argc, char *argv[])
 
     // ----------- Testing rankTopThreeByTotal ----------- //
 
-    fprintf(stdout, "TESTING RANK TO 3 BY TOTAL\n");
+    fprintf(stdout, "TESTING rankTopThreeByTotal\n");
     rankTopThreeByTotal(totalAllCountries, countryNames);
-    fprintf(stdout, "TESTING RANK TO 3 BY TOTAL\n");
+    fprintf(stdout, "TESTING rankTopThreeByTotal\n");
 
     // ----------- Testing rankTopThreeByTotal ----------- //
 
     // ----------- Testing rankTopThreeByMedal ----------- //
 
-    fprintf(stderr, "TESTING rankTopThreeByMedal (8)\n");
-    fprintf(stderr, "Student's Output:\n");
+    fprintf(stdout, "TESTING rankTopThreeByMedal\n");
     rankTopThreeByMedal(country, countryNames);
-    fprintf(stderr, "\nExpected Ouput:\n");
-    fprintf(stderr, "Australia (67)\nEngland (57)\nCanada (26)\n");
-    fprintf(stderr, "Please assign a grade out of 8 for how well the student's output matches the expected output:\n");
-    do
-    {
-        scanf("%lf", &rankTopThreeByMedalMark);
-        if (rankTopThreeByMedalMark < 0 || rankTopThreeByMedalMark > 8)
-        {
-            fprintf(stderr, "Please enter a valid number betwen 0 and 8\n");
-        }
-    } while (rankTopThreeByMedalMark < 0 || rankTopThreeByMedalMark > 8);
+    fprintf(stdout, "TESTING rankTopThreeByMedal\n");
 
     // ----------- Testing rankTopThreeByMedal ----------- //
 
