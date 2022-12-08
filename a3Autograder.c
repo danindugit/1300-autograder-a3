@@ -40,6 +40,7 @@ double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpect
 double hHistogramTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
 double searchCountryTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
 double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES]);
+double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES]);
 
 // Helper functions
 int findElement(int a[], int size, int item);
@@ -140,52 +141,55 @@ int main(int argc, char *argv[])
     // ----------- Testing findAllWithOnlyXMedals ----------- //
 
     fprintf(stderr, "TESTING findAllWithOnlyXMedals (12)\n");
-    // gold
-    findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 1, indexOfCountries);
-    if (findAllWithOnlyXMedalsResult != 1)
-    {
-        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
-    }
-    else
-    {
-        findAllWithOnlyXMedalsMark += 2;
-        // expected index = 11
-        if (indexOfCountries[0] == 11)
-        {
-            findAllWithOnlyXMedalsMark += 2;
-        }
-    }
-    // silver
-    findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 2, indexOfCountries);
-    if (findAllWithOnlyXMedalsResult != 1)
-    {
-        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
-    }
-    else
-    {
-        findAllWithOnlyXMedalsMark += 2;
-        // expected index = 14
-        if (indexOfCountries[0] == 14)
-        {
-            findAllWithOnlyXMedalsMark += 2;
-        }
-    }
-    // bronze
-    findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 3, indexOfCountries);
-    if (findAllWithOnlyXMedalsResult != 1)
-    {
-        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
-    }
-    else
-    {
-        findAllWithOnlyXMedalsMark += 2;
-        // expected index = 13
-        if (indexOfCountries[0] == 13)
-        {
-            findAllWithOnlyXMedalsMark += 2;
-        }
-    }
-    fprintf(stderr, "Mark for findAllWithOnlyXMedals = %d\n", findAllWithOnlyXMedalsMark);
+    findAllWithOnlyXMedalsMark = findAllWithOnlyXMedalsTest(country, countryExpected, indexOfCountries, indexOfCountriesExpected);
+    fprintf(stderr, "%.1lf/12\n", findAllWithOnlyXMedalsMark);
+
+    // // gold
+    // findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 1, indexOfCountries);
+    // if (findAllWithOnlyXMedalsResult != 1)
+    // {
+    //     fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
+    // }
+    // else
+    // {
+    //     findAllWithOnlyXMedalsMark += 2;
+    //     // expected index = 11
+    //     if (indexOfCountries[0] == 11)
+    //     {
+    //         findAllWithOnlyXMedalsMark += 2;
+    //     }
+    // }
+    // // silver
+    // findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 2, indexOfCountries);
+    // if (findAllWithOnlyXMedalsResult != 1)
+    // {
+    //     fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
+    // }
+    // else
+    // {
+    //     findAllWithOnlyXMedalsMark += 2;
+    //     // expected index = 14
+    //     if (indexOfCountries[0] == 14)
+    //     {
+    //         findAllWithOnlyXMedalsMark += 2;
+    //     }
+    // }
+    // // bronze
+    // findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 3, indexOfCountries);
+    // if (findAllWithOnlyXMedalsResult != 1)
+    // {
+    //     fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
+    // }
+    // else
+    // {
+    //     findAllWithOnlyXMedalsMark += 2;
+    //     // expected index = 13
+    //     if (indexOfCountries[0] == 13)
+    //     {
+    //         findAllWithOnlyXMedalsMark += 2;
+    //     }
+    // }
+    // fprintf(stderr, "Mark for findAllWithOnlyXMedals = %d\n", findAllWithOnlyXMedalsMark);
 
     // ----------- Testing findAllWithOnlyXMedals ----------- //
 
@@ -702,6 +706,73 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
     // bronze
     expectedReturn = findAllWithNoXMedalsExpected(countryExpected, 3, indexOfCountriesExpected);
     studentReturn = findAllWithNoXMedals(country, 3, indexOfCountries);
+    if (expectedReturn != studentReturn)
+    {
+        mark--;
+    }
+    // check if the expected indices are in the student's indexOfCountries array
+    deductCount = 0;
+    for (int i = 0; i < expectedReturn; i++)
+    {
+        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        {
+            mark--;
+            deductCount++;
+        }
+    }
+
+    if (mark < 0)
+    {
+        mark = 0;
+    }
+
+    return mark;
+}
+
+double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES])
+{
+    int expectedReturn, studentReturn, deductCount;
+    double mark = 0;
+
+    // gold
+    expectedReturn = findAllWithOnlyXMedalsExpected(countryExpected, 1, indexOfCountriesExpected);
+    studentReturn = findAllWithOnlyXMedals(country, 1, indexOfCountries);
+    if (expectedReturn != studentReturn)
+    {
+        mark--;
+    }
+    // check if the expected indices are in the student's indexOfCountries array
+    deductCount = 0;
+    for (int i = 0; i < expectedReturn; i++)
+    {
+        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        {
+            mark--;
+            deductCount++;
+        }
+    }
+
+    // silver
+    expectedReturn = findAllWithOnlyXMedalsExpected(countryExpected, 2, indexOfCountriesExpected);
+    studentReturn = findAllWithOnlyXMedals(country, 2, indexOfCountries);
+    if (expectedReturn != studentReturn)
+    {
+        mark--;
+    }
+    // check if the expected indices are in the student's indexOfCountries array
+    deductCount = 0;
+    for (int i = 0; i < expectedReturn; i++)
+    {
+        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        {
+            mark--;
+            deductCount++;
+        }
+    }
+
+    // bronze
+    expectedReturn = findAllWithOnlyXMedalsExpected(countryExpected, 3, indexOfCountriesExpected);
+    studentReturn = findAllWithOnlyXMedals(country, 3, indexOfCountries);
     if (expectedReturn != studentReturn)
     {
         mark--;
