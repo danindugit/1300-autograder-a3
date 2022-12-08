@@ -144,53 +144,6 @@ int main(int argc, char *argv[])
     findAllWithOnlyXMedalsMark = findAllWithOnlyXMedalsTest(country, countryExpected, indexOfCountries, indexOfCountriesExpected);
     fprintf(stderr, "%.1lf/12\n", findAllWithOnlyXMedalsMark);
 
-    // // gold
-    // findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 1, indexOfCountries);
-    // if (findAllWithOnlyXMedalsResult != 1)
-    // {
-    //     fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
-    // }
-    // else
-    // {
-    //     findAllWithOnlyXMedalsMark += 2;
-    //     // expected index = 11
-    //     if (indexOfCountries[0] == 11)
-    //     {
-    //         findAllWithOnlyXMedalsMark += 2;
-    //     }
-    // }
-    // // silver
-    // findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 2, indexOfCountries);
-    // if (findAllWithOnlyXMedalsResult != 1)
-    // {
-    //     fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
-    // }
-    // else
-    // {
-    //     findAllWithOnlyXMedalsMark += 2;
-    //     // expected index = 14
-    //     if (indexOfCountries[0] == 14)
-    //     {
-    //         findAllWithOnlyXMedalsMark += 2;
-    //     }
-    // }
-    // // bronze
-    // findAllWithOnlyXMedalsResult = findAllWithOnlyXMedals(country, 3, indexOfCountries);
-    // if (findAllWithOnlyXMedalsResult != 1)
-    // {
-    //     fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithOnlyXMedalsResult);
-    // }
-    // else
-    // {
-    //     findAllWithOnlyXMedalsMark += 2;
-    //     // expected index = 13
-    //     if (indexOfCountries[0] == 13)
-    //     {
-    //         findAllWithOnlyXMedalsMark += 2;
-    //     }
-    // }
-    // fprintf(stderr, "Mark for findAllWithOnlyXMedals = %d\n", findAllWithOnlyXMedalsMark);
-
     // ----------- Testing findAllWithOnlyXMedals ----------- //
 
     // ----------- Testing findCountryIndexWithMinOrMaxLength  ----------- //
