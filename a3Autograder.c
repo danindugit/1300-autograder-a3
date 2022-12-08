@@ -26,6 +26,7 @@ void readFromFileExpected(char fName[30], int country[COUNTRIES][MEDALCAT], char
 void findTotalPerCountryExpected(int country [COUNTRIES][MEDALCAT], int totalAllCountries [COUNTRIES]);
 int findTotalPerMedalExpected(int country [COUNTRIES][MEDALCAT], int totalAllMedals [MEDALCAT], int * whichMedal);
 void hHistogramExpected(char countryNames [COUNTRIES][100], int totalAllCountries[COUNTRIES]);
+int searchCountryExpected(char countryName [100], char countryNames [COUNTRIES][100], int totalAllCountries[COUNTRIES]);
 void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[COUNTRIES][100]);
 void rankTopThreeByMedalExpected(int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100]);
 int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES]);
@@ -37,7 +38,7 @@ double readFromFileTest(char* filename, int country[COUNTRIES][MEDALCAT], int co
 double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES], char countryNamesExpected[COUNTRIES][100]);
 double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllMedals[MEDALCAT], int totalAllMedalsExpected[MEDALCAT]);
 double hHistogramTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
-
+double searchCountryTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
 
 int main(int argc, char *argv[]) {
 
@@ -68,6 +69,7 @@ int main(int argc, char *argv[]) {
     double findTotalPerCountryMark = 8.0;
     double findTotalPerMedalMark = 6.0;
     double hHistogramMark = 10.0;
+    double searchCountryMark = 8.0;
     double rankTopThreeByTotalMark = 0;
     double rankTopThreeByMedalMark = 0;
     int findAllWithNoXMedalsMark = 0;
@@ -94,11 +96,14 @@ int main(int argc, char *argv[]) {
     // ----------- Testing hHistogram ----------- //
 
     fprintf(stderr, "TESTING hHistogram (10)\n");
+    fprintf(stderr, "NEED TO MANUALLY GRADE\n");
     hHistogramMark = hHistogramTest(countryNames, countryNamesExpected, totalAllCountries, totalAllCountriesExpected);
-    fprintf(stderr, "%.1lf/10\n", hHistogramMark);
 
     // ----------- Testing searchCountry ----------- //
 
+    fprintf(stderr, "TESTING searchCountry (8)\n");
+    searchCountryMark = searchCountryTest(countryNames, countryNamesExpected, totalAllCountries, totalAllCountriesExpected);
+    fprintf(stderr, "%.1lf/8\n", searchCountryMark);
 
     // ----------- Testing rankTopThreeByTotal ----------- //
 
@@ -386,6 +391,27 @@ void hHistogramExpected(char countryNames [COUNTRIES][100], int totalAllCountrie
    return ;
 }
 
+int searchCountryExpected(char countryName [100], char countryNames [COUNTRIES][100], int totalAllCountries[COUNTRIES]){
+
+   printf ("In searchCountry\n");
+   
+   int index = -1;
+   
+   for (int i = 0; i < COUNTRIES; i++) {
+   
+      if (strcmp (countryName, countryNames [i]) == 0) {
+         index = i;
+      }
+   }
+   
+   if (index != -1) {
+       return totalAllCountries [index];
+   }
+   else {
+       return -1;
+   }
+}
+
 void rankTopThreeByTotalExpected(int totalMedals[COUNTRIES], char countryNames[COUNTRIES][100])
 {
     int currentMax, currentIndex;
@@ -654,3 +680,29 @@ double hHistogramTest(char countryNames[COUNTRIES][100], char countryNamesExpect
     return hHistogramMark;
 }
 
+double searchCountryTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]) {
+    double searchCountryMark = 8.0;
+    int outputExpected = 0;
+    int output = 0;
+    
+
+    for (int i = 0; i < COUNTRIES; i++) {
+        outputExpected = searchCountryExpected(countryNamesExpected[i], countryNamesExpected, totalAllCountriesExpected);
+        output = searchCountry(countryNames[i], countryNames, totalAllCountries);
+        if (output != outputExpected) {
+                fprintf(stderr, "TEST CASE FAILED\n%s: %d != %d\n", countryNamesExpected[i], output, outputExpected);
+                searchCountryMark -= 0.5;
+            }
+    }
+
+    outputExpected = searchCountryExpected("Russia", countryNamesExpected, totalAllCountriesExpected);
+    output = searchCountry("Russia", countryNames, totalAllCountries);
+    if (output != outputExpected) {
+            fprintf(stderr, "TEST CASE FAILED\n%s: %d != %d\n", "Russia", output, outputExpected);
+            searchCountryMark -= 0.5;
+            }
+
+
+
+    return searchCountryMark;
+}
