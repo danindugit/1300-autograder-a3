@@ -1,0 +1,10 @@
+In findTotal
+In findTotal
+TESTING RANK TO 3 BY TOTAL
+Australia (178)
+England (176)
+Canada (92)
+TESTING RANK TO 3 BY TOTAL
+Australia (67)
+England (57)
+Canada (26)

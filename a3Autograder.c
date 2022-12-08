@@ -30,9 +30,12 @@ int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMeda
 int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMedal, int indexOfCountries[COUNTRIES]);
 int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100]);
 
+//Test functions
+double readFromFileTest(char* filename, int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100]);
+double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES], char countryNamesExpected[COUNTRIES][100]);
 
-int main(int argc, char *argv[])
-{
+
+int main(int argc, char *argv[]) {
 
     fprintf(stderr, "Welcome to the A3 Autograder\n");
 
@@ -56,8 +59,9 @@ int main(int argc, char *argv[])
     int totalAllCountriesExpected[COUNTRIES];
 
     // marks
-    double readFromFileMark = 10;
-    double findTotalPerCountryMark = 8;
+    double readFromFileMark = 10.0;
+    double findTotalPerCountryMark = 8.0;
+    double findTotalPerMedalMark = 6.0;
     double rankTopThreeByTotalMark = 0;
     double rankTopThreeByMedalMark = 0;
     int findAllWithNoXMedalsMark = 0;
@@ -66,72 +70,19 @@ int main(int argc, char *argv[])
     // ----------- Testing readFromFile ----------- //
 
     fprintf(stderr, "TESTING readFromFile (10)\n");
-
-    readFromFileExpected(argv[1], countryExpected, countryNamesExpected);
-    readFromFile(argv[1], country, countryNames);
-    for (int i = 0; i < COUNTRIES; i++)
-    {
-        if (strcmp(countryNames[i], countryNamesExpected[i]) != 0)
-        {
-            fprintf(stderr, "TEST CASE FAILED\nCountry name -- %s != %s\n", countryNames[i], countryNamesExpected[i]);
-            readFromFileMark -= 0.5;
-        }
-        for (int j = 0; j < MEDALCAT; j++)
-        {
-            if (country[i][j] != countryExpected[i][j])
-            {
-                fprintf(stderr, "TEST CASE FAILED\nCountry: %s Medal: %d != %d\n", countryNames[i], country[i][j], countryExpected[i][j]);
-                readFromFileMark -= 0.5;
-            }
-        }
-    }
-
-    if (readFromFileMark < 0.0)
-    {
-        readFromFileMark = 0.0;
-    }
-    fprintf(stderr, "%.01lf/10\n", readFromFileMark);
-
-    // ----------- Testing readFromFile ----------- //
-
+    readFromFileMark = readFromFileTest(argv[1], country, countryExpected, countryNames, countryNamesExpected);
+    fprintf(stderr, "%.1lf/10\n", readFromFileMark);
 
     // ----------- Testing findTotalPerCountry ----------- //
 
     fprintf(stderr, "TESTING findTotalPerCountry (8)\n");
-
-    findTotalPerCountryExpected(countryExpected, totalAllCountriesExpected);
-    findTotalPerCountry(country, totalAllCountries);
-
-    for (int i = 0; i < COUNTRIES; i++) {
-        if (totalAllCountries[i] != totalAllCountriesExpected[i])
-            {
-                fprintf(stderr, "TEST CASE FAILED\n%s: %d != %d\n", countryNamesExpected[i], totalAllCountries[i], totalAllCountriesExpected[i]);
-                findTotalPerCountryMark -= 0.5;
-            }
-    }
-
-    if (findTotalPerCountryMark == 0.5)
-    {
-        findTotalPerCountryMark = 0.0;
-    }
-    fprintf(stderr, "%.01lf/8\n", findTotalPerCountryMark);
-
-    // ----------- Testing findTotalPerCountry ----------- //
-
-
-    // ----------- Testing findTotalPerMedal ----------- //
-
+    findTotalPerCountryMark = findTotalPerCountryTest(country, countryExpected, totalAllCountries, totalAllCountriesExpected, countryNamesExpected);
+    fprintf(stderr, "%.1lf/8\n", findTotalPerCountryMark);
 
     // ----------- Testing findTotalPerMedal ----------- //
 
 
     // ----------- Testing hHistogram ----------- //
-
-
-    // ----------- Testing hHistogram ----------- //
-
-
-    // ----------- Testing searchCountry ----------- //
 
 
     // ----------- Testing searchCountry ----------- //
@@ -141,7 +92,9 @@ int main(int argc, char *argv[])
 
     fprintf(stderr, "TESTING rankTopThreeByTotal (8)\n");
     fprintf(stderr, "Student's Output:\n");
+    printf("TESTING RANK TO 3 BY TOTAL\n");
     rankTopThreeByTotal(totalAllCountries, countryNames);
+    printf("TESTING RANK TO 3 BY TOTAL\n");
     fprintf(stderr, "\nExpected Ouput:\n");
     fprintf(stderr, "Australia (178)\nEngland (176)\nCanada (92)\n");
     fprintf(stderr, "Please assign a grade out of 8 for how well the student's output matches the expected output:\n");
@@ -336,23 +289,6 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-// void findMax(int arr[COUNTRIES], int *maxValue, int *maxIndex)
-// {
-
-//     *maxValue = arr[0];
-
-//     for (int i = 0; i < COUNTRIES; i++)
-//     {
-
-//         if (arr[i] >= *maxValue)
-//         {
-
-//             *maxValue = arr[i];
-//             *maxIndex = i;
-//         }
-//     }
-// }
 
 void readFromFileExpected(char fName[30], int country[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100])
 {
@@ -573,4 +509,54 @@ int findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[C
     }
 
     return index;
+}
+
+double readFromFileTest(char* filename, int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100]) {
+    double readFromFileMark = 10.0;
+    readFromFileExpected(filename, countryExpected, countryNamesExpected);
+    readFromFile(filename, country, countryNames);
+    for (int i = 0; i < COUNTRIES; i++)
+    {
+        if (strcmp(countryNames[i], countryNamesExpected[i]) != 0)
+        {
+            fprintf(stderr, "TEST CASE FAILED\nCountry name -- %s != %s\n", countryNames[i], countryNamesExpected[i]);
+            readFromFileMark -= 0.5;
+        }
+        for (int j = 0; j < MEDALCAT; j++)
+        {
+            if (country[i][j] != countryExpected[i][j])
+            {
+                fprintf(stderr, "TEST CASE FAILED\nCountry: %s Medal: %d != %d\n", countryNames[i], country[i][j], countryExpected[i][j]);
+                readFromFileMark -= 0.5;
+            }
+        }
+    }
+
+    if (readFromFileMark < 0.0)
+    {
+        readFromFileMark = 0.0;
+    }
+
+    return readFromFileMark;
+}
+
+double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES], char countryNamesExpected[COUNTRIES][100]) {
+    double findTotalPerCountryMark = 10.0;
+    findTotalPerCountryExpected(countryExpected, totalAllCountriesExpected);
+    findTotalPerCountry(country, totalAllCountries);
+
+    for (int i = 0; i < COUNTRIES; i++) {
+        if (totalAllCountries[i] != totalAllCountriesExpected[i])
+            {
+                fprintf(stderr, "TEST CASE FAILED\n%s: %d != %d\n", countryNamesExpected[i], totalAllCountries[i], totalAllCountriesExpected[i]);
+                findTotalPerCountryMark -= 0.5;
+            }
+    }
+
+    if (findTotalPerCountryMark == 0.5)
+    {
+        findTotalPerCountryMark = 0.0;
+    }
+
+    return findTotalPerCountryMark;
 }
