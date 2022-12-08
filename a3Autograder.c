@@ -71,8 +71,8 @@ int main(int argc, char *argv[])
     double findTotalPerMedalMark = 6.0;
     double hHistogramMark = 10.0;
     double searchCountryMark = 8.0;
-    double rankTopThreeByTotalMark = 0;
-    double rankTopThreeByMedalMark = 0;
+    double rankTopThreeByTotalMark = 12;
+    double rankTopThreeByMedalMark = 12;
     int findAllWithNoXMedalsMark = 0;
     int findAllWithOnlyXMedalsMark = 0;
 
@@ -108,17 +108,17 @@ int main(int argc, char *argv[])
 
     // ----------- Testing rankTopThreeByTotal ----------- //
 
-    fprintf(stdout, "TESTING rankTopThreeByTotal\n");
+    fprintf(stdout, "TESTING rankTopThreeByTotal (12)\n");
     rankTopThreeByTotal(totalAllCountries, countryNames);
-    fprintf(stdout, "TESTING rankTopThreeByTotal\n");
+    fprintf(stdout, "TESTING rankTopThreeByTotal (12)\n");
 
     // ----------- Testing rankTopThreeByTotal ----------- //
 
     // ----------- Testing rankTopThreeByMedal ----------- //
 
-    fprintf(stdout, "TESTING rankTopThreeByMedal\n");
+    fprintf(stdout, "TESTING rankTopThreeByMedal (12)\n");
     rankTopThreeByMedal(country, countryNames);
-    fprintf(stdout, "TESTING rankTopThreeByMedal\n");
+    fprintf(stdout, "TESTING rankTopThreeByMedal (12)\n");
 
     // ----------- Testing rankTopThreeByMedal ----------- //
 
