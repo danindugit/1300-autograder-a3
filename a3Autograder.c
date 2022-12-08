@@ -39,6 +39,10 @@ double findTotalPerCountryTest(int country[COUNTRIES][MEDALCAT], int countryExpe
 double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int totalAllMedals[MEDALCAT], int totalAllMedalsExpected[MEDALCAT]);
 double hHistogramTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
 double searchCountryTest(char countryNames[COUNTRIES][100], char countryNamesExpected[COUNTRIES][100], int totalAllCountries[COUNTRIES], int totalAllCountriesExpected[COUNTRIES]);
+double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES]);
+
+// Helper functions
+int findElement(int a[], int size, int item);
 
 int main(int argc, char *argv[])
 {
@@ -64,6 +68,7 @@ int main(int argc, char *argv[])
     char countryNamesExpected[COUNTRIES][100];
     int totalAllCountriesExpected[COUNTRIES];
     int totalAllMedalsExpected[MEDALCAT];
+    int indexOfCountriesExpected[COUNTRIES];
 
     // marks
     double readFromFileMark = 10.0;
@@ -73,8 +78,8 @@ int main(int argc, char *argv[])
     double searchCountryMark = 8.0;
     double rankTopThreeByTotalMark = 12;
     double rankTopThreeByMedalMark = 12;
-    int findAllWithNoXMedalsMark = 0;
-    int findAllWithOnlyXMedalsMark = 0;
+    double findAllWithNoXMedalsMark = 0;
+    double findAllWithOnlyXMedalsMark = 0;
 
     // ----------- Testing readFromFile ----------- //
 
@@ -108,78 +113,27 @@ int main(int argc, char *argv[])
 
     // ----------- Testing rankTopThreeByTotal ----------- //
 
+    fprintf(stderr, "TESTING rankTopThreeByTotal (12)\n");
+    fprintf(stderr, "NEED TO MANUALLY GRADE\n");
     fprintf(stdout, "TESTING rankTopThreeByTotal (12)\n");
     rankTopThreeByTotal(totalAllCountries, countryNames);
-    fprintf(stdout, "TESTING rankTopThreeByTotal (12)\n");
 
     // ----------- Testing rankTopThreeByTotal ----------- //
 
     // ----------- Testing rankTopThreeByMedal ----------- //
 
+    fprintf(stderr, "TESTING rankTopThreeByMedal (12)\n");
+    fprintf(stderr, "NEED TO MANUALLY GRADE\n");
     fprintf(stdout, "TESTING rankTopThreeByMedal (12)\n");
     rankTopThreeByMedal(country, countryNames);
-    fprintf(stdout, "TESTING rankTopThreeByMedal (12)\n");
 
     // ----------- Testing rankTopThreeByMedal ----------- //
 
     // ----------- Testing findAllWithNoXMedals ----------- //
 
     fprintf(stderr, "TESTING findAllWithNoXMedals (12)\n");
-    // gold
-    findAllWithNoXMedalsResult = findAllWithNoXMedals(country, 1, indexOfCountries);
-    if (findAllWithNoXMedalsResult != 3)
-    {
-        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithNoXMedalsResult);
-    }
-    else
-    {
-        findAllWithNoXMedalsMark++;
-        // expected indices: 12, 13, 14
-        for (int i = 0; i < findAllWithNoXMedalsResult; i++)
-        {
-            if (indexOfCountries[i] == 12 || indexOfCountries[i] == 13 || indexOfCountries[i] == 14)
-            {
-                findAllWithNoXMedalsMark++;
-            }
-        }
-    }
-    // silver
-    findAllWithNoXMedalsResult = findAllWithNoXMedals(country, 2, indexOfCountries);
-    if (findAllWithNoXMedalsResult != 3)
-    {
-        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithNoXMedalsResult);
-    }
-    else
-    {
-        findAllWithNoXMedalsMark++;
-        // expected indices: 9, 11, 13
-        for (int i = 0; i < findAllWithNoXMedalsResult; i++)
-        {
-            if (indexOfCountries[i] == 9 || indexOfCountries[i] == 11 || indexOfCountries[i] == 13)
-            {
-                findAllWithNoXMedalsMark++;
-            }
-        }
-    }
-    // bronze
-    findAllWithNoXMedalsResult = findAllWithNoXMedals(country, 3, indexOfCountries);
-    if (findAllWithNoXMedalsResult != 3)
-    {
-        fprintf(stderr, "TEST CASE FAILED\n Count -- %d != 3\n", findAllWithNoXMedalsResult);
-    }
-    else
-    {
-        findAllWithNoXMedalsMark++;
-        // expected indices: 10, 11, 14
-        for (int i = 0; i < findAllWithNoXMedalsResult; i++)
-        {
-            if (indexOfCountries[i] == 10 || indexOfCountries[i] == 11 || indexOfCountries[i] == 14)
-            {
-                findAllWithNoXMedalsMark++;
-            }
-        }
-    }
-    fprintf(stderr, "Mark for findAllWithNoXMedals = %d\n", findAllWithNoXMedalsMark);
+    findAllWithNoXMedalsMark = findAllWithNoXMedalsTest(country, countryExpected, indexOfCountries, indexOfCountriesExpected);
+    fprintf(stderr, "%.1lf/12\n", findAllWithNoXMedalsMark);
 
     // ----------- Testing findAllWithNoXMedals ----------- //
 
@@ -702,4 +656,85 @@ double searchCountryTest(char countryNames[COUNTRIES][100], char countryNamesExp
     }
 
     return searchCountryMark;
+}
+
+double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES])
+{
+    int expectedReturn, studentReturn, deductCount;
+    double mark = 0;
+
+    // gold
+    expectedReturn = findAllWithNoXMedalsExpected(countryExpected, 1, indexOfCountriesExpected);
+    studentReturn = findAllWithNoXMedals(country, 1, indexOfCountries);
+    if (expectedReturn != studentReturn)
+    {
+        mark--;
+    }
+    // check if the expected indices are in the student's indexOfCountries array
+    deductCount = 0;
+    for (int i = 0; i < expectedReturn; i++)
+    {
+        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        {
+            mark--;
+            deductCount++;
+        }
+    }
+
+    // silver
+    expectedReturn = findAllWithNoXMedalsExpected(countryExpected, 2, indexOfCountriesExpected);
+    studentReturn = findAllWithNoXMedals(country, 2, indexOfCountries);
+    if (expectedReturn != studentReturn)
+    {
+        mark--;
+    }
+    // check if the expected indices are in the student's indexOfCountries array
+    deductCount = 0;
+    for (int i = 0; i < expectedReturn; i++)
+    {
+        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        {
+            mark--;
+            deductCount++;
+        }
+    }
+
+    // bronze
+    expectedReturn = findAllWithNoXMedalsExpected(countryExpected, 3, indexOfCountriesExpected);
+    studentReturn = findAllWithNoXMedals(country, 3, indexOfCountries);
+    if (expectedReturn != studentReturn)
+    {
+        mark--;
+    }
+    // check if the expected indices are in the student's indexOfCountries array
+    deductCount = 0;
+    for (int i = 0; i < expectedReturn; i++)
+    {
+        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        {
+            mark--;
+            deductCount++;
+        }
+    }
+
+    if (mark < 0)
+    {
+        mark = 0;
+    }
+
+    return mark;
+}
+
+int findElement(int a[], int size, int item)
+{
+    int i, pos = -1;
+    for (i = 0; i < size; i++)
+    {
+        if (a[i] == item)
+        {
+            pos = i;
+            break;
+        }
+    }
+    return pos;
 }
