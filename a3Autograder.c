@@ -60,10 +60,6 @@ int main(int argc, char *argv[])
     int cIndex, minOrMax;
     int choice;
 
-    // results
-    int findAllWithNoXMedalsResult = 0;
-    int findAllWithOnlyXMedalsResult = 0;
-
     // expected
     int countryExpected[COUNTRIES][3];
     char countryNamesExpected[COUNTRIES][100];
@@ -77,10 +73,10 @@ int main(int argc, char *argv[])
     double findTotalPerMedalMark = 6.0;
     double hHistogramMark = 10.0;
     double searchCountryMark = 8.0;
-    double rankTopThreeByTotalMark = 12;
-    double rankTopThreeByMedalMark = 12;
-    double findAllWithNoXMedalsMark = 0;
-    double findAllWithOnlyXMedalsMark = 0;
+    double rankTopThreeByTotalMark = 8;
+    double rankTopThreeByMedalMark = 8;
+    double findAllWithNoXMedalsMark = 12;
+    double findAllWithOnlyXMedalsMark = 12;
 
     // ----------- Testing readFromFile ----------- //
 
@@ -618,7 +614,7 @@ double searchCountryTest(char countryNames[COUNTRIES][100], char countryNamesExp
 double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES])
 {
     int expectedReturn, studentReturn, deductCount;
-    double mark = 0;
+    double mark = 12;
 
     // gold
     expectedReturn = findAllWithNoXMedalsExpected(countryExpected, 1, indexOfCountriesExpected);
@@ -685,7 +681,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
 double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExpected[COUNTRIES][MEDALCAT], int indexOfCountries[COUNTRIES], int indexOfCountriesExpected[COUNTRIES])
 {
     int expectedReturn, studentReturn, deductCount;
-    double mark = 0;
+    double mark = 12;
 
     // gold
     expectedReturn = findAllWithOnlyXMedalsExpected(countryExpected, 1, indexOfCountriesExpected);
