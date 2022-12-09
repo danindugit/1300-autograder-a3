@@ -1,12 +1,9 @@
 In findTotal
-In findTotal
-In findTotalPerMedal
 In findTotalPerMedal
 
 
 hHistogram Expected
 
-In hHistogram
 Australia : ***************************************************************************************** (178)
 England   : **************************************************************************************** (176)
 Canada    : ********************************************** (92)
@@ -62,22 +59,6 @@ In searchCountry
 In searchCountry
 In searchCountry
 In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
-In searchCountry
 
 
 rankTopThreeByTotal Expected
@@ -89,15 +70,6 @@ Canada (92)
 
 rankTopThreeByTotal student's Output
 
-
-
-TESTING rankTopThreeByTotal (12)
-Expected Output:
-Australia (178)
-England (176)
-Canada (92)
-*****************
-Student's Output:
 Australia (178)
 England (176)
 Canada (92)

@@ -207,7 +207,7 @@ void readFromFileExpected(char fName[30], int country[COUNTRIES][MEDALCAT], char
 void findTotalPerCountryExpected(int country[COUNTRIES][MEDALCAT], int totalAllCountries[COUNTRIES])
 {
 
-    printf("In findTotal\n");
+    // printf("In findTotal\n");
 
     for (int i = 0; i < COUNTRIES; i++)
     {
@@ -229,7 +229,7 @@ int findTotalPerMedalExpected(int country[COUNTRIES][MEDALCAT], int totalAllMeda
     int max;
     int i, j;
 
-    printf("In findTotalPerMedal\n");
+    // printf("In findTotalPerMedal\n");
 
     for (j = 0; j < MEDALCAT; j++)
     {
@@ -265,7 +265,7 @@ int findTotalPerMedalExpected(int country[COUNTRIES][MEDALCAT], int totalAllMeda
 void hHistogramExpected(char countryNames[COUNTRIES][100], int totalAllCountries[COUNTRIES])
 {
 
-    printf("In hHistogram\n");
+    // printf("In hHistogram\n");
 
     for (int i = 0; i < COUNTRIES; i++)
     {
@@ -286,7 +286,7 @@ void hHistogramExpected(char countryNames[COUNTRIES][100], int totalAllCountries
 int searchCountryExpected(char countryName[100], char countryNames[COUNTRIES][100], int totalAllCountries[COUNTRIES])
 {
 
-    printf("In searchCountry\n");
+    // printf("In searchCountry\n");
 
     int index = -1;
 
