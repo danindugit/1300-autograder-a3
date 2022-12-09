@@ -660,7 +660,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
     if (expectedReturn != studentReturn)
     {
         mark--;
-        fprintf(stderr, "TEST CASE FAILED\n: Expected = %d | Actual = %d\n", expectedReturn, studentReturn);
+        fprintf(stderr, "TEST CASE FAILED\nExpected = %d | Actual = %d\n", expectedReturn, studentReturn);
     }
     // check if the expected indices are in the student's indexOfCountries array
     deductCount = 0;
@@ -670,7 +670,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
         {
             mark--;
             deductCount++;
-            fprintf(stderr, "TEST CASE FAILED\n: Could not find index %d\n", indexOfCountriesExpected[i]);
+            fprintf(stderr, "TEST CASE FAILED\nCould not find index %d\n", indexOfCountriesExpected[i]);
         }
     }
 
@@ -680,7 +680,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
     if (expectedReturn != studentReturn)
     {
         mark--;
-        fprintf(stderr, "TEST CASE FAILED\n: Expected = %d | Actual = %d\n", expectedReturn, studentReturn);
+        fprintf(stderr, "TEST CASE FAILED\nExpected = %d | Actual = %d\n", expectedReturn, studentReturn);
     }
     // check if the expected indices are in the student's indexOfCountries array
     deductCount = 0;
@@ -690,7 +690,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
         {
             mark--;
             deductCount++;
-            fprintf(stderr, "TEST CASE FAILED\n: Could not find index %d\n", indexOfCountriesExpected[i]);
+            fprintf(stderr, "TEST CASE FAILED\nCould not find index %d\n", indexOfCountriesExpected[i]);
         }
     }
 
@@ -700,7 +700,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
     if (expectedReturn != studentReturn)
     {
         mark--;
-        fprintf(stderr, "TEST CASE FAILED\n: Expected = %d | Actual = %d\n", expectedReturn, studentReturn);
+        fprintf(stderr, "TEST CASE FAILED\nExpected = %d | Actual = %d\n", expectedReturn, studentReturn);
     }
     // check if the expected indices are in the student's indexOfCountries array
     deductCount = 0;
@@ -710,7 +710,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
         {
             mark--;
             deductCount++;
-            fprintf(stderr, "TEST CASE FAILED\n: Could not find index %d\n", indexOfCountriesExpected[i]);
+            fprintf(stderr, "TEST CASE FAILED\nCould not find index %d\n", indexOfCountriesExpected[i]);
         }
     }
 
@@ -733,7 +733,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
     if (expectedReturn != studentReturn)
     {
         mark--;
-        fprintf(stderr, "TEST CASE FAILED\n: Expected = %d | Actual = %d\n", expectedReturn, studentReturn);
+        fprintf(stderr, "TEST CASE FAILED\nExpected = %d | Actual = %d\n", expectedReturn, studentReturn);
     }
     // check if the expected indices are in the student's indexOfCountries array
     deductCount = 0;
@@ -743,7 +743,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
         {
             mark--;
             deductCount++;
-            fprintf(stderr, "TEST CASE FAILED\n: Could not find index %d\n", indexOfCountriesExpected[i]);
+            fprintf(stderr, "TEST CASE FAILED\nCould not find index %d\n", indexOfCountriesExpected[i]);
         }
     }
 
@@ -753,7 +753,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
     if (expectedReturn != studentReturn)
     {
         mark--;
-        fprintf(stderr, "TEST CASE FAILED\n: Expected = %d | Actual = %d\n", expectedReturn, studentReturn);
+        fprintf(stderr, "TEST CASE FAILED\nExpected = %d | Actual = %d\n", expectedReturn, studentReturn);
     }
     // check if the expected indices are in the student's indexOfCountries array
     deductCount = 0;
@@ -763,7 +763,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
         {
             mark--;
             deductCount++;
-            fprintf(stderr, "TEST CASE FAILED\n: Could not find index %d\n", indexOfCountriesExpected[i]);
+            fprintf(stderr, "TEST CASE FAILED\nCould not find index %d\n", indexOfCountriesExpected[i]);
         }
     }
 
@@ -773,7 +773,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
     if (expectedReturn != studentReturn)
     {
         mark--;
-        fprintf(stderr, "TEST CASE FAILED\n: Expected = %d | Actual = %d\n", expectedReturn, studentReturn);
+        fprintf(stderr, "TEST CASE FAILED\nExpected = %d | Actual = %d\n", expectedReturn, studentReturn);
     }
     // check if the expected indices are in the student's indexOfCountries array
     deductCount = 0;
@@ -783,7 +783,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
         {
             mark--;
             deductCount++;
-            fprintf(stderr, "TEST CASE FAILED\n: Could not find index %d\n", indexOfCountriesExpected[i]);
+            fprintf(stderr, "TEST CASE FAILED\nCould not find index %d\n", indexOfCountriesExpected[i]);
         }
     }
 
@@ -802,6 +802,7 @@ double findCountryIndexWithMinOrMaxLengthTest(char countryNames[COUNTRIES][100],
     int *minExpectedReturns = findCountryIndexWithMinOrMaxLengthExpected(1, countryNamesExpected);
     int *maxExpectedReturns = findCountryIndexWithMinOrMaxLengthExpected(2, countryNamesExpected);
     int count;
+    int returnFound = 0;
 
     studentReturn = findCountryIndexWithMinOrMaxLength(1, countryNames);
     count = 0;
@@ -810,11 +811,17 @@ double findCountryIndexWithMinOrMaxLengthTest(char countryNames[COUNTRIES][100],
         if (minExpectedReturns[count] == studentReturn)
         {
             mark += 4;
+            returnFound = 1;
             break;
         }
         count++;
     }
+    if (returnFound == 0)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n%d was not one of the expected return values.\n", studentReturn);
+    }
 
+    returnFound = 0;
     studentReturn = findCountryIndexWithMinOrMaxLength(2, countryNames);
     count = 0;
     while (maxExpectedReturns[count] != -1)
@@ -822,9 +829,14 @@ double findCountryIndexWithMinOrMaxLengthTest(char countryNames[COUNTRIES][100],
         if (maxExpectedReturns[count] == studentReturn)
         {
             mark += 4;
+            returnFound = 1;
             break;
         }
         count++;
+    }
+    if (returnFound == 0)
+    {
+        fprintf(stderr, "TEST CASE FAILED\n%d was not one of the expected return values.\n", studentReturn);
     }
 
     free(minExpectedReturns);
