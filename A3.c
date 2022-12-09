@@ -6,6 +6,8 @@
 #define MEDALCAT 3
 #define MAX_LENGTH_CNAME 100
 
+void findMax (int arr [COUNTRIES], int * maxValue, int * maxIndex);
+
 void readFromFile (char fName [30], int country [COUNTRIES][MEDALCAT], char countryNames [COUNTRIES][100]);
 
 void findTotalPerCountry (int country [COUNTRIES] [MEDALCAT],

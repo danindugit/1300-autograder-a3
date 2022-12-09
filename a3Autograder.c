@@ -47,6 +47,7 @@ double findCountryIndexWithMinOrMaxLengthTest(char countryNames[COUNTRIES][100],
 
 // Helper functions
 int findElement(int a[], int size, int item);
+void findMax (int arr [COUNTRIES], int * maxValue, int * maxIndex); 
 
 int main(int argc, char *argv[])
 {
@@ -55,13 +56,9 @@ int main(int argc, char *argv[])
 
     int country[COUNTRIES][MEDALCAT];
     int totalAllMedals[MEDALCAT];
-    int row, maxMedal, whichMedal, totalM;
     int totalAllCountries[COUNTRIES];
     char countryNames[COUNTRIES][100];
-    char name[100];
     int indexOfCountries[COUNTRIES];
-    int cIndex, minOrMax;
-    int choice;
 
     // expected
     int countryExpected[COUNTRIES][3];
@@ -76,11 +73,11 @@ int main(int argc, char *argv[])
     double findTotalPerMedalMark = 6.0;
     double hHistogramMark = 10.0;
     double searchCountryMark = 8.0;
-    double rankTopThreeByTotalMark = 8;
-    double rankTopThreeByMedalMark = 8;
-    double findAllWithNoXMedalsMark = 12;
-    double findAllWithOnlyXMedalsMark = 12;
-    double findCountryIndexWithMinOrMaxLengthMark = 8;
+    double rankTopThreeByTotalMark = 8.0;
+    double rankTopThreeByMedalMark = 8.0;
+    double findAllWithNoXMedalsMark = 12.0;
+    double findAllWithOnlyXMedalsMark = 12.0;
+    double findCountryIndexWithMinOrMaxLengthMark = 8.0;
 
     // ----------- Testing readFromFile ----------- //
 
@@ -116,19 +113,19 @@ int main(int argc, char *argv[])
 
     fprintf(stderr, "TESTING rankTopThreeByTotal (12)\n");
     fprintf(stderr, "NEED TO MANUALLY GRADE\n");
-    fprintf(stdout, "TESTING rankTopThreeByTotal (12)\n");
+    fprintf(stdout, "\n\nrankTopThreeByTotal Expected\n\n");
+    rankTopThreeByTotalExpected(totalAllCountriesExpected, countryNamesExpected);
+    fprintf(stdout, "\n\nrankTopThreeByTotal student's Output\n\n");
     rankTopThreeByTotal(totalAllCountries, countryNames);
-
-    // ----------- Testing rankTopThreeByTotal ----------- //
 
     // ----------- Testing rankTopThreeByMedal ----------- //
 
     fprintf(stderr, "TESTING rankTopThreeByMedal (12)\n");
     fprintf(stderr, "NEED TO MANUALLY GRADE\n");
-    fprintf(stdout, "TESTING rankTopThreeByMedal (12)\n");
+    fprintf(stdout, "\n\nrankTopThreeByMedal Expected\n\n");
+    rankTopThreeByMedalExpected(countryExpected, countryNamesExpected);
+    fprintf(stdout, "\n\nrankTopThreeByMedal student's Output\n\n");
     rankTopThreeByMedal(country, countryNames);
-
-    // ----------- Testing rankTopThreeByMedal ----------- //
 
     // ----------- Testing findAllWithNoXMedals ----------- //
 
@@ -136,15 +133,11 @@ int main(int argc, char *argv[])
     findAllWithNoXMedalsMark = findAllWithNoXMedalsTest(country, countryExpected, indexOfCountries, indexOfCountriesExpected);
     fprintf(stderr, "%.1lf/12\n", findAllWithNoXMedalsMark);
 
-    // ----------- Testing findAllWithNoXMedals ----------- //
-
     // ----------- Testing findAllWithOnlyXMedals ----------- //
 
     fprintf(stderr, "TESTING findAllWithOnlyXMedals (12)\n");
     findAllWithOnlyXMedalsMark = findAllWithOnlyXMedalsTest(country, countryExpected, indexOfCountries, indexOfCountriesExpected);
     fprintf(stderr, "%.1lf/12\n", findAllWithOnlyXMedalsMark);
-
-    // ----------- Testing findAllWithOnlyXMedals ----------- //
 
     // ----------- Testing findCountryIndexWithMinOrMaxLength  ----------- //
 
@@ -152,45 +145,44 @@ int main(int argc, char *argv[])
     findCountryIndexWithMinOrMaxLengthMark = findCountryIndexWithMinOrMaxLengthTest(countryNames, countryNamesExpected);
     fprintf(stderr, "%.1lf/8\n", findCountryIndexWithMinOrMaxLengthMark);
 
-    // ----------- Testing findCountryIndexWithMinOrMaxLength  ----------- //
+    // ----------- Printing Mark ----------- //
 
-    //     // ----------- Printing Mark ----------- //
+    double totalMarks = readFromFileMark + findTotalPerCountryMark + findTotalPerMedalMark + hHistogramMark +
+    searchCountryMark + rankTopThreeByTotalMark + rankTopThreeByMedalMark + findAllWithNoXMedalsMark +
+    findAllWithOnlyXMedalsMark + findCountryIndexWithMinOrMaxLengthMark;
 
-    //     int totalMarks = isBasePairMark + isItaDnaSequenceMark + reverseMark +
-    //     complementItMark + isItPalindromeMark + isStrandDnaPalindromeMark + howManyMark + dnaToMrnaMark + 6;
-
-    //     fprintf(stdout,"\n\n\n");
-    //     fprintf(stdout,"Instant Zero: NONE\n");
-    //     fprintf(stdout,"\tCode that fails to compile with flags (-Wall -std=c99)\n");
-    //     fprintf(stdout,"\tCode uses global variables\n");
-    //     fprintf(stdout,"\tCode uses goto statements\n");
-    //     fprintf(stdout,"\tA main is submitted\n");
-    //     fprintf(stdout,"\n");
-    //     fprintf(stdout,"General Deductions: 0\n");
-    //     fprintf(stdout,"\t-2.5 (5%%) for each unique warning\n");
-    //     fprintf(stdout,"\t-5 (10%%) for incorrect filename (lastnameFirstnameA2.c)\n");
-    //     fprintf(stdout,"\tLateness\n");
-    //     fprintf(stdout,"\n");
-    //     fprintf(stdout,"Style: 5/5\n");
-    //     fprintf(stdout,"\t-2 Header comment\n");
-    //     fprintf(stdout,"\t-1 Variable namming\n");
-    //     fprintf(stdout,"\t-1 Commenting\n");
-    //     fprintf(stdout,"\t-1 Consistent spacing / Readability\n");
-    //     fprintf(stdout,"\n");
-    //     fprintf(stdout,"Program Specifications: %d/45\n", totalMarks);
-    //     fprintf(stdout,"\tisBasePair %d/4\n", isBasePairMark);
-    //     fprintf(stdout,"\tisItaDnaSequence %d/8\n", isItaDnaSequenceMark);
-    //     fprintf(stdout,"\treverse  %d/5\n", reverseMark);
-    //     fprintf(stdout,"\tcomplementIt  %d/6\n", complementItMark);
-    //     fprintf(stdout,"\tisItPalindrome %d/4\n", isItPalindromeMark);
-    //     fprintf(stdout,"\tisStrandDnaPalindrome  %d/4\n", isStrandDnaPalindromeMark);
-    //     fprintf(stdout,"\thowMany %d/3\n", howManyMark);
-    //     fprintf(stdout,"\tdnaToMrna %d/5\n", dnaToMrnaMark);
-    //     fprintf(stdout,"\ttranslateDnaToMrnaProteins  6/6\n");
-    //     fprintf(stdout,"\n");
-    //     fprintf(stdout,"TOTAL %d/50\n", totalMarks+5);
-    //     fprintf(stdout,"\n");
-    //     fprintf(stdout,"Marked by TA Or Brener\n");
+    fprintf(stdout,"\n\n\n");
+    fprintf(stdout,"Instant Zero: NONE\n");
+    fprintf(stdout,"\tCode that fails to compile with flags (-Wall -std=c99)\n");
+    fprintf(stdout,"\tCode uses global variables\n");
+    fprintf(stdout,"\tCode uses goto statements\n");
+    fprintf(stdout,"\n");
+    fprintf(stdout,"General Deductions: 0\n");
+    fprintf(stdout,"\t-5 (5%%) for each unique warning\n");
+    fprintf(stdout,"\t-10 (10%%) for incorrect filename (lastnameFirstnameA3.c)\n");
+    fprintf(stdout,"\tLateness\n");
+    fprintf(stdout,"\n");
+    fprintf(stdout,"Style: 10/10\n");
+    fprintf(stdout,"\t-2 Header comment\n");
+    fprintf(stdout,"\t-2.5 Variable namming\n");
+    fprintf(stdout,"\t-2.5 Commenting\n");
+    fprintf(stdout,"\t-3 Consistent spacing / Readability\n");
+    fprintf(stdout,"\n");
+    fprintf(stdout,"Program Specifications: %.1lf/90\n", totalMarks);
+    fprintf(stdout,"\treadFromFile %.1lf/10\n", readFromFileMark);
+    fprintf(stdout,"\tfindTotalPerCountry %.1lf/8\n", findTotalPerCountryMark);
+    fprintf(stdout,"\tfindTotalPerMedal %.1lf/6\n", findTotalPerMedalMark);
+    fprintf(stdout,"\thHistogram %.1lf/10\n", hHistogramMark);
+    fprintf(stdout,"\tsearchCountry %.1lf/8\n", searchCountryMark);
+    fprintf(stdout,"\trankTopThreeByTotal %.1lf/8\n", rankTopThreeByTotalMark);
+    fprintf(stdout,"\trankTopThreeByMedal %.1lf/8\n", rankTopThreeByMedalMark);
+    fprintf(stdout,"\tfindAllWithNoXMedals %.1lf/12\n", findAllWithNoXMedalsMark);
+    fprintf(stdout,"\tfindAllWithOnlyXMedals %.1lf/12\n", findAllWithOnlyXMedalsMark);
+    fprintf(stdout,"\tfindCountryIndexWithMinOrMaxLength  %.1lf/8\n", findCountryIndexWithMinOrMaxLengthMark);
+    fprintf(stdout,"\n");
+    fprintf(stdout,"TOTAL %.1lf/100\n", totalMarks+10.0);
+    fprintf(stdout,"\n");
+    fprintf(stdout,"Marked by TA Or Brener\n");
 
     fprintf(stderr, "CONGRADULATIONS, finished marking this student!\n");
 
@@ -474,7 +466,7 @@ int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMe
 int *findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[COUNTRIES][100])
 {
     int m = strlen(countryNames[0]);
-    int index;
+    // int index;
     int *indexArray = malloc(sizeof(int) * COUNTRIESTEST);
     int count = 0;
 
@@ -487,7 +479,7 @@ int *findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[
             if (strlen(countryNames[i]) < m)
             {
                 m = strlen(countryNames[i]);
-                index = i;
+                // index = i;
             }
         }
         for (int i = 0; i < COUNTRIES; i++)
@@ -507,7 +499,7 @@ int *findCountryIndexWithMinOrMaxLengthExpected(int minOrMax, char countryNames[
             if (strlen(countryNames[i]) > m)
             {
                 m = strlen(countryNames[i]);
-                index = i;
+                // index = i;
             }
         }
         for (int i = 0; i < COUNTRIES; i++)
@@ -585,8 +577,8 @@ double findTotalPerMedalTest(int country[COUNTRIES][MEDALCAT], int countryExpect
     double findTotalPerMedalMark = 6.0;
     char medals[3][100] = {"Gold", "Silver", "Bronze"};
     int choice = 1;
-    int outputExpected = findTotalPerMedalExpected(countryExpected, totalAllMedalsExpected, &choice);
-    int output = findTotalPerMedal(country, totalAllMedals, &choice);
+    findTotalPerMedalExpected(countryExpected, totalAllMedalsExpected, &choice);
+    findTotalPerMedal(country, totalAllMedals, &choice);
 
     for (int i = 0; i < MEDALCAT; i++)
     {
