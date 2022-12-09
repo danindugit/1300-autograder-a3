@@ -89,6 +89,15 @@ Canada (92)
 
 rankTopThreeByTotal student's Output
 
+
+
+TESTING rankTopThreeByTotal (12)
+Expected Output:
+Australia (178)
+England (176)
+Canada (92)
+*****************
+Student's Output:
 Australia (178)
 England (176)
 Canada (92)
