@@ -116,7 +116,11 @@ int main(int argc, char *argv[])
 
     fprintf(stderr, "TESTING rankTopThreeByTotal (12)\n");
     fprintf(stderr, "NEED TO MANUALLY GRADE\n");
-    fprintf(stdout, "TESTING rankTopThreeByTotal (12)\n");
+    fprintf(stdout, "\n\nTESTING rankTopThreeByTotal (12)\n");
+    fprintf(stdout, "Expected Output:\n");
+    rankTopThreeByTotalExpected(totalAllCountriesExpected, countryNamesExpected);
+    fprintf(stdout, "*****************\n");
+    fprintf(stdout, "Student's Output:\n");
     rankTopThreeByTotal(totalAllCountries, countryNames);
 
     // ----------- Testing rankTopThreeByTotal ----------- //
@@ -125,7 +129,11 @@ int main(int argc, char *argv[])
 
     fprintf(stderr, "TESTING rankTopThreeByMedal (12)\n");
     fprintf(stderr, "NEED TO MANUALLY GRADE\n");
-    fprintf(stdout, "TESTING rankTopThreeByMedal (12)\n");
+    fprintf(stdout, "\n\nTESTING rankTopThreeByMedal (12)\n");
+    fprintf(stdout, "Expected Output:\n");
+    rankTopThreeByMedalExpected(countryExpected, countryNamesExpected);
+    fprintf(stdout, "*****************\n");
+    fprintf(stdout, "Student's Output:\n");
     rankTopThreeByMedal(country, countryNames);
 
     // ----------- Testing rankTopThreeByMedal ----------- //
