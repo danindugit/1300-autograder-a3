@@ -47,7 +47,21 @@ double findCountryIndexWithMinOrMaxLengthTest(char countryNames[COUNTRIES][100],
 
 // Helper functions
 int findElement(int a[], int size, int item);
-void findMax (int arr [COUNTRIES], int * maxValue, int * maxIndex); 
+void findMax (int arr [COUNTRIES], int * maxValue, int * maxIndex) {
+    
+    *maxValue = arr [0];
+    
+    
+    for (int i = 0; i < COUNTRIES; i++) {
+       
+       if (arr [i] >= *maxValue) {
+       
+          *maxValue = arr [i];
+          *maxIndex = i;
+       }
+    }
+    
+}
 
 int main(int argc, char *argv[])
 {
