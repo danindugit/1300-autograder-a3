@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
     fprintf(stdout,"\n");
     fprintf(stdout,"Style: 10/10\n");
     fprintf(stdout,"\t-2 Header comment\n");
-    fprintf(stdout,"\t-2.5 Variable namming\n");
+    fprintf(stdout,"\t-2.5 Variable naming\n");
     fprintf(stdout,"\t-2.5 Commenting\n");
     fprintf(stdout,"\t-3 Consistent spacing / Readability\n");
     fprintf(stdout,"\n");
@@ -366,11 +366,6 @@ int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMeda
 
     for (int i = 0; i < COUNTRIES; i++)
     {
-        indexOfCountries[i] = -1;
-    }
-
-    for (int i = 0; i < COUNTRIES; i++)
-    {
         gold[i] = country[i][0];
     }
 
@@ -387,20 +382,20 @@ int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMeda
     for (int i = 0; i < COUNTRIES; i++)
     {
 
-        switch (indexMedal)
+        switch (indexMedal - 1)
         {
 
         case 0:
             if (gold[i] == 0)
             {
-                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                indexOfCountries[total] = i; 
                 total++;
             }
             break;
         case 1:
             if (silver[i] == 0)
             {
-                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                indexOfCountries[total] = i; 
                 total++;
             }
             break;
@@ -408,7 +403,7 @@ int findAllWithNoXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMeda
         case 2:
             if (bronze[i] == 0)
             {
-                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                indexOfCountries[total] = i; 
                 total++;
             }
             break;
@@ -425,11 +420,6 @@ int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMe
 
     for (int i = 0; i < COUNTRIES; i++)
     {
-        indexOfCountries[i] = -1;
-    }
-
-    for (int i = 0; i < COUNTRIES; i++)
-    {
         gold[i] = country[i][0];
     }
 
@@ -446,28 +436,28 @@ int findAllWithOnlyXMedalsExpected(int country[COUNTRIES][MEDALCAT], int indexMe
     for (int i = 0; i < COUNTRIES; i++)
     {
 
-        switch (indexMedal)
+        switch (indexMedal - 1)
         {
 
         case 0:
-            if (gold[i] >= 0 && silver[i] == 0 && bronze[i] == 0)
+            if (gold[i] > 0 && silver[i] == 0 && bronze[i] == 0)
             {
-                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                indexOfCountries[total] = i;
                 total++;
             }
             break;
         case 1:
-            if (gold[i] == 0 && silver[i] >= 0 && bronze[i] == 0)
+            if (gold[i] == 0 && silver[i] > 0 && bronze[i] == 0)
             {
-                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                indexOfCountries[total] = i; 
                 total++;
             }
             break;
 
         case 2:
-            if (gold[i] == 0 && silver[i] == 0 && bronze[i] >= 0)
+            if (gold[i] == 0 && silver[i] == 0 && bronze[i] > 0)
             {
-                indexOfCountries[i] = 1; // index becomes 1 when 0 medal is found for a country
+                indexOfCountries[total] = i; 
                 total++;
             }
             break;
@@ -664,7 +654,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
     deductCount = 0;
     for (int i = 0; i < expectedReturn; i++)
     {
-        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        if (indexOfCountriesExpected[i] != indexOfCountries[i] && deductCount < 3)
         {
             mark--;
             deductCount++;
@@ -684,7 +674,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
     deductCount = 0;
     for (int i = 0; i < expectedReturn; i++)
     {
-        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        if (indexOfCountriesExpected[i] != indexOfCountries[i] && deductCount < 3)
         {
             mark--;
             deductCount++;
@@ -704,7 +694,7 @@ double findAllWithNoXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryExp
     deductCount = 0;
     for (int i = 0; i < expectedReturn; i++)
     {
-        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        if (indexOfCountriesExpected[i] != indexOfCountries[i] && deductCount < 3)
         {
             mark--;
             deductCount++;
@@ -737,7 +727,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
     deductCount = 0;
     for (int i = 0; i < expectedReturn; i++)
     {
-        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        if (indexOfCountriesExpected[i] != indexOfCountries[i] && deductCount < 3)
         {
             mark--;
             deductCount++;
@@ -757,7 +747,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
     deductCount = 0;
     for (int i = 0; i < expectedReturn; i++)
     {
-        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        if (indexOfCountriesExpected[i] != indexOfCountries[i] && deductCount < 3)
         {
             mark--;
             deductCount++;
@@ -777,7 +767,7 @@ double findAllWithOnlyXMedalsTest(int country[COUNTRIES][MEDALCAT], int countryE
     deductCount = 0;
     for (int i = 0; i < expectedReturn; i++)
     {
-        if (findElement(indexOfCountries, studentReturn, indexOfCountriesExpected[i]) == -1 && deductCount < 3)
+        if (indexOfCountriesExpected[i] != indexOfCountries[i] && deductCount < 3)
         {
             mark--;
             deductCount++;
